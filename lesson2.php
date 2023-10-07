@@ -10,7 +10,8 @@
 <body>
 <b style="font-size: 30px">
     <?php
-    header('Content-Type: text/html; charset=utf-8');
+
+//    1.1 CodeMU
  $numArr = [1,4,6,7,8,23];
     $arr = 'fs dfg dfg';
     $num = -1;
@@ -25,7 +26,7 @@
     //2
     echo '<br>' .'2 задание: Длина строки '. strlen($arr) . '<br>';
     //3
-    echo '3 задание: Последний символ строки - ' . substr($arr, -1) . '<br>';
+    echo '3 задание: Последний символ строки - ' . $arr . ' - ' . substr($arr, -1).  '<br>';
     //4
     if($four %  2 == 0){
         echo '4 задание: Чётное' . '<br>';
@@ -38,59 +39,29 @@
 if($first[0] == $second[0]){
     echo '5 задание: первые быквы слов ' . implode($first) . ' и ' . implode($second) . ' совпадают';
 }else{
-    echo '5 задание: первые быквы слов ' . implode($first) . ' и ' . implode($second) . ' не совпадают';
+    echo '5 задание: первые быквы слов ' . implode($first) . ' и ' . implode($second) . ' не совпадают' . '<br>';
 }
 
 //6
-    $word = 'Топь';
-//echo '<br>' . str_split($word)[0];
-//    echo substr($word, 0);
-//    echo str_split(substr($word, 0))[0];
-    echo str_split($word)[0];
-//if(str_split(substr($word, 0))[0])
+    $word = 'xhaemb';
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   $newArr =  explode(' ',$arr);
-//    echo $newArr;
-
-//   echo str_split($arr)[0];
-   $num3 = 131414;
-//   echo '<br>' . str_split($num3)[0] ;
-//echo '<br>' . substr($num3, -1);
-//    echo str_Split($num3)[5];
-//   echo '<br>' . str_split($num3)[strlen($num3) -1];
-$result = explode(" ", $arr);
-//    echo "<br>" . $result[1];
-
-
+    if(str_split($word)[strlen($word) -1] == 'b'){
+        echo 'Задание 6: Если последняя буква b из слова ' . $word . ', будет выведена предпоследняя - ' . str_split($word)[strlen($word) - 2];
+    }else{
+       echo 'Задание 6: Последняя буква не b';
+    }
+//codemu 1.4
+    $num3 = 831414;
     $one = 24;
     $two = 12;
-    if($one % $two){
-//        echo '<br>' . 'without';
-    }else{
-//        echo '<br>' . 'with';
-    }
-//    for($i = -100; $i <= 0; $i--){
-//        echo '<br>' . $i;
-//    }
-//    echo "<br>" . 'lalala      aaa';
+    echo  '<br>' . 'Task 1:  First digit of number ' . $num3 . ' is '. str_split($num3)[0];
+    echo  '<br>' . 'Task 2:  Last digit of number ' . $num3 . ' is '. str_split($num3)[strlen($num3)-1];
+    echo '<br>' . 'Task 3: Sum first and last symbol of number ' . $num3 .' is ' . (str_Split($num3)[0] + str_split($num3)[strlen($num3) -1]);
+    echo '<br>' . 'Task4: Number of digits in the number ' . $num3 . ' is ' . strlen($num3);
+    if(str_split($one)[0] == str_split($two)[0]){
+        echo '<br>' . 'Task 5: first digits of numbers ' . $one . ' and ' . $two .  ' match';
+    }else echo '<br>' . 'Task 5: first digits of numbers ' . $one . ' and ' . $two . ' not match';
+
     ?>
 </b>
 
