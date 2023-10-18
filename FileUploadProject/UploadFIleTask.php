@@ -15,7 +15,7 @@
 </form>
 <?php
 class FileUploader{
-public function checkFolder($folder, $inputFIle){
+ function checkFolder($folder, $inputFIle){
     if(is_dir($folder)){
         return $this->UploadFile($folder, $inputFIle);
     }else{
@@ -23,27 +23,25 @@ public function checkFolder($folder, $inputFIle){
         return $this->UploadFile($folder, $inputFIle);
     }
 }
-    public function UploadFile($folder, $inputFIle){
-        $Full_year = ['Января' , 'Февраля' , 'Марта' , 'Апреля' , 'Мая' , 'Июня' , 'Июля' , 'Августа' , 'Сентября' , 'Октября' , 'Ноября' , 'Декабря'];
+     function UploadFile($folder, $inputFIle){
         date_default_timezone_set('Europe/Moscow');
+        $Full_year = ['Января' , 'Февраля' , 'Марта' , 'Апреля' , 'Мая' , 'Июня' , 'Июля' , 'Августа' , 'Сентября' , 'Октября' , 'Ноября' , 'Декабря'];
         $date = getdate()['mon'];
         $currentHour = getdate()['hours'];
         $translateMonth = $Full_year[$date -1] ;
-
-        $timeStamp = date("d $translateMonth Y, $currentHour:i:s") . ' File name: ' . $_FILES[$inputFIle]['name'];
-       $log_file =file_put_contents('Log_of_update.txt', $timeStamp . '\n', FILE_APPEND);
+        $timeStamp = date("d $translateMonth Y, $currentHour:i:s") . ' File name: ' . $_FILES[$inputFIle]['name'] . "\n";
+$log_file_name = "$folder/Log_of_update.txt";
+        file_put_contents($log_file_name, $timeStamp , FILE_APPEND);
         $path_to =  $_FILES[$inputFIle]['name'];
             move_uploaded_file($_FILES[$inputFIle]['tmp_name'], $folder . '/'. $path_to);
-        file_get_contents('Log_of_update');
-        move_uploaded_file($log_file, $folder . '/'. $path_to);
+ }
 
-echo $timeStamp;
-    }
 }
 
 $init_class = new FileUploader();
 $init_class->CheckFolder('FOLDER', 'choose_area');
-
+$fileName =  $_FILES['choose_area']['name'] . '<br>';
+//echo $_SERVER['DOCUMENT_ROOT'] . "\\$fileName";
 ?>
 
 
