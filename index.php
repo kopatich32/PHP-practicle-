@@ -1,71 +1,46 @@
 <?php
-var_dump($_POST)
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-   <form action="" method="POST">
-   <input type="text" name="tr" placeholder="name">
-    <input type="text" name="td" placeholder="password">
-    <input type="submit" value="push">
-   </form>
-   <table border="1">
-   <?php
-if (!empty($_POST)) {
-    $tr = $_POST['tr'];
-    $td = $_POST['td'];
-    for ($i = 0; $i < $tr; $i++) {
-        ?> <tr> <?php
-        for ($j = 0; $j < $td; $j++) {
-            ?>
-<td><?=$j?></td>
-            <?php
-        }?>
-    </tr>
+<pre>
     <?php
+    // $str = 'This is an encoded string';
+    // $str2 = base64_encode($str);
+    // echo base64_encode($str);
+    // echo base64_decode($str2);
+
+
+// var_dump($_FILES);
+// if(!empty($_FILES))
+// {
+//     $udir = 'files/';
+//     $uploadfile = $udir . $_FILES['ufile']['name'];
+//     echo $uploadfile;
+    
+//     if (move_uploaded_file($_FILES['ufile']['tmp_name'], $uploadfile)) {
+//         echo "Файл корректен и был успешно загружен.\n";
+//     }
+    
+// }
+include 'FileWorker.php';
+$fw = new FileWorker();
+
+if(!empty($_FILES))
+{
+    $status = $fw->UploadFileForm('llala','ufile');
+    var_dump($status);
+    if($status)
+    {
+        echo 'Файл загружен';
+    }
+    else
+    {
+        echo 'не-а';
     }
 }
-?>
-<?php
 
-$users = [
-    1=>[
-        'name'=>'ivan',
-        'last_name' => 'Ivanov',
-        'age'=> 20,
-    ],2=>[
-        'name'=>'Alesha',
-        'last_name' => 'Balalaikin',
-        'age'=> 25,
-    ],3=>[
-        'name'=>'Masha',
-        'last_name' => 'V kaske',
-        'age'=> 25,
-    ],
-];
-if(!empty($users)){
-    ?> <table border="1"> <?php
-    foreach($users as $key=> $value){
-        ?> <tr><?php
-        ?><td><?php
-        echo $key;
-        ?></td><?php
-        foreach($value as $key=>$info){
-            ?><td><?php
-            echo $info;
-            ?></td><?php
-        }      
-        ?></tr><?php
-    }
-    ?></tr><?php
-
-}
 ?>
-</table>
-</body>
-</html>
+</pre>
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="ufile" id="">
+        <input type="submit" value="отправить">
+    </form>

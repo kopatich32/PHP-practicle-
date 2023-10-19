@@ -40,7 +40,7 @@ $log_file_name = "$folder/Log_of_update.txt";
 
 $init_class = new FileUploader();
 $init_class->CheckFolder('FOLDER', 'choose_area');
-$fileName =  $_FILES['choose_area']['name'] . '<br>';
+//$fileName =  $_FILES['choose_area']['name'] . '<br>';
 //echo $_SERVER['DOCUMENT_ROOT'] . "\\$fileName";
 ?>
 
