@@ -126,28 +126,20 @@ function console_log($data){
 
 //5
 
-$reverse_str = 'kawm';
-$res = strrev($reverse_str);
-echo $res;
+//$reverse_str = 'kawm';
+//$res = strrev($reverse_str);
+//echo $res;
+
+$temperatureF =  32;
+$difference =  9/5;
+$currentTempC = 12;
+$currentTempF = 53.6;
+
+echo 'По Фаренгейту -' . $currentTempC * $difference + $temperatureF . '<br>';
+echo   "По цельсию - " . ($currentTempF - $temperatureF) / $difference;
+
 ?>
 
-<script>
-    let arr = [];
-    let arr1 = [5,13,9,4,67,1]
-    for(let i = 0; i <= 100; i++){
-        arr.push(i)
-    }
-    let res = arr.reduce((acc, cur)=>{
-        return acc + cur;
-    })
-    console.log(res)
-    let res2 = arr1.reduce(function(acc, cur){
-        if(acc > cur) {
-            return acc
-        }else return  cur
-    }
-    )
-    console.log(res2)
-</script>
+
 </body>
 </html>
