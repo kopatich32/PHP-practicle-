@@ -69,13 +69,15 @@
 ////1.4
 
 ////1
-function console_log($data){
-    if(is_array($data) || is_object($data)){
-        echo("<script>console.log('php_array: ".json_encode($data)."');</script>");
+function console_log($data)
+{
+    if (is_array($data) || is_object($data)) {
+        echo("<script>console.log('php_array: " . json_encode($data) . "');</script>");
     } else {
-        echo("<script>console.log('php_string: ".$data."');</script>");
+        echo("<script>console.log('php_string: " . $data . "');</script>");
     }
 }
+
 //for($i = -100; $i <= 0; $i++){
 ////  console_log($i);
 //}
@@ -130,16 +132,28 @@ function console_log($data){
 //$res = strrev($reverse_str);
 //echo $res;
 
-$temperatureF =  32;
-$difference =  9/5;
-$currentTempC = 12;
-$currentTempF = 53.6;
+//$temperatureF =  32;
+//$difference =  9/5;
+//$currentTempC = 12;
+//$currentTempF = 53.6;
+//
+//echo 'По Фаренгейту -' . $currentTempC * $difference + $temperatureF . '<br>';
+//echo   "По цельсию - " . ($currentTempF - $temperatureF) / $difference;
 
-echo 'По Фаренгейту -' . $currentTempC * $difference + $temperatureF . '<br>';
-echo   "По цельсию - " . ($currentTempF - $temperatureF) / $difference;
 
-?>
+//$arr = ['year' => getdate()['year'], 'month'=> getdate()['month'], 'day'=>getdate()['mday']];
 
+$arr = [1,3,6,5];
+if(count($arr) >= 3){
+    $res = $arr[0]+$arr[1]+$arr[2];
+}
+ ?>
+
+
+<pre id="pre">
+<?= $res?>
+
+</pre>
 
 </body>
 </html>
