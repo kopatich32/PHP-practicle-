@@ -45,6 +45,9 @@ if(isset($_POST['submit'])){
     }
 
 
+$query1 =$DataBase->query("SELECT * FROM `Zoo`");
+    $row = $query1->fetch_assoc();
+    echo$row['Animal'][0];
 
 
 
@@ -61,6 +64,8 @@ if($DataBase->connection_errno){
 //    var_dump($result);
     echo '<table border="1">';
     while($row =$query->fetch_assoc()){
+
+        var_dump($row);
         echo '<tr>';
         echo '<td>';
         echo $row['id'];
