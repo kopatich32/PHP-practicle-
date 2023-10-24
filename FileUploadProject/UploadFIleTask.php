@@ -16,12 +16,15 @@
 <?php
 class FileUploader{
  function checkFolder($folder, $inputFIle){
-    if(is_dir($folder)){
-        return $this->UploadFile($folder, $inputFIle);
-    }else{
-        mkdir($folder, '0777');
-        return $this->UploadFile($folder, $inputFIle);
-    }
+     if(!empty($_FILES)){
+         if(is_dir($folder)){
+             return $this->UploadFile($folder, $inputFIle);
+         }else{
+             mkdir($folder, '0777');
+             return $this->UploadFile($folder, $inputFIle);
+         }
+     }
+
 }
      function UploadFile($folder, $inputFIle){
         date_default_timezone_set('Europe/Moscow');

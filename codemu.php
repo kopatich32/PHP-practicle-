@@ -143,15 +143,22 @@ function console_log($data)
 
 //$arr = ['year' => getdate()['year'], 'month'=> getdate()['month'], 'day'=>getdate()['mday']];
 
-$arr = [1,3,6,5];
-if(count($arr) >= 3){
-    $res = $arr[0]+$arr[1]+$arr[2];
-}
+//$arr = [1,3,6,5];
+//if(count($arr) >= 3){
+//    $res = $arr[0]+$arr[1]+$arr[2];
+//}
  ?>
+<?php
+$arr = [null, 2, 3, 4, 5];
 
+if (isset($arr[0])) {
+    echo '+++';
+} else {
+    echo '---';
+}
+?>
 
 <pre id="pre">
-<?= $res?>
 
 </pre>
 

@@ -17,9 +17,10 @@
 
 <?php
 //1
-
+//Дан текстовый файл. Получите количество символов в нем.
 //$charLength = file_get_contents('text.txt');
-//echo strlen($charLength);
+//echo '<pre>'. strlen($charLength) . "</pre>";
+//echo $charLength;
 
 //2
 
@@ -29,24 +30,33 @@
 //3
 
 //$str = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic, recusandae.";
-$str = file_get_contents('text.txt');
-$splitted_str = explode(' ', $str);
-foreach($splitted_str as $key=> $value){
-    if($key % 2 == 0){
-        echo "<b>$value </b>";
-    }else{
-        echo "<i>$value </i>";
-    }
+//$str = file_get_contents('text.txt');
+//$splitted_str = explode(' ', $str);
+//foreach($splitted_str as $key=> $value){
+//    if($key % 2 == 0){
+//     $res1 = "<b>$value </b>";
+//    }else{
+//         $res2 ="<i>$value </i>";
+//        file_put_contents('result.txt', $res2);
+//    }
+//}
+//echo 'lala'
 
-}
+
 //4
 //Дан текстовый файл со словами и с дробями вида 1/2. Напишите программу, которая обернет каждую дробь в свой тег span. Результат запишите в новый файл.
-$fraction = "Lorem   ipsum dolor 1/2 sit amet, consectetur 3/4 adipisicing elit. Hic, recusandae.";
-$position =strpos($fraction, '/');
+$fraction = file_get_contents('text.txt');
+//$position =strpos($fraction, '/');
 $regExp = '#(\d.\d)#';
 $search = preg_match_all($regExp, $fraction, $matches);
-print_r($matches);
+foreach($matches[0] as $value){
+    echo '<b>'.  $value. " " .'</b>';
+}
 ?>
+<pre>
+    <?= print_r($matches);?>
+<!--    Почему 2 массива?-->
+</pre>
 
 </body>
 </html>
