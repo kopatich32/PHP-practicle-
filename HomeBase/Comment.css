@@ -1,0 +1,58 @@
+* {
+  padding: 0;
+  margin: 0; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: center;
+  width: 100%;
+  height: 100vh; }
+
+.comment_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: center;
+  width: 90%;
+  border: 2px solid sandybrown;
+  padding: 20px; }
+  .comment_wrapper form {
+    width: 100%; }
+
+textarea {
+  max-width: 100%;
+  min-width: 100%;
+  min-height: 50px; }
+
+.left_symbols {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: normal;
+  align-self: flex-end; }
+  .left_symbols .counter {
+    margin-left: 10px; }
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: normal;
+  align-self: flex-end;
+  margin-top: 20px; }
+  .buttons button {
+    width: 80px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 5px; }
+  .buttons .close {
+    background: none;
+    border: none; }
+  .buttons .send {
+    background: #22903b;
+    color: white;
+    border: none; }
+
+/*# sourceMappingURL=Comment.css.map */
