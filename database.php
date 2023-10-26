@@ -17,12 +17,26 @@
     <input type="submit" name="delete" value="delete">
 </form>
 <?php
+$DataBase = @new mysqli('localhost','root','','FirstBase');
 
-$db_adress = 'localhost';
-$db_user = 'root';
-$db_password = '';
-$dta_testdb = 'FirstBase';
-$DataBase = @new mysqli($db_adress,$db_user,$db_password,$dta_testdb);
+class DBcrud{
+    protected $tableName;
+    public function __construct($tName){
+        $this->tableName = $tName;
+        }
+        public function insert($arrayField, $arrayValues){
+        if(!empty($arrayField) && !empty($arrayValues)){
+            $fieldArr = implode(',',$arrayField);
+            $fieldVal = implode(',',$arrayValues);
+
+        }
+    }
+}
+$arrName = ['Animal'];
+$arrV = ['Cat'];
+$db = new DBcrud('zoo');
+$db->insert($arrName, $arrV);
+
 if(isset($_POST['submit'])){
     if($DataBase->connection_errno){
         echo "error: " .$DataBase->connection_errno;
@@ -65,7 +79,7 @@ if($DataBase->connection_errno){
     echo '<table border="1">';
     while($row =$query->fetch_assoc()){
 
-        var_dump($row);
+//        var_dump($row);
         echo '<tr>';
         echo '<td>';
         echo $row['id'];

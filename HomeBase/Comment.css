@@ -9,13 +9,14 @@ body {
   align-items: center;
   width: 100%;
   height: 100vh; }
+  body .container {
+    width: 90%; }
 
 .comment_wrapper {
   display: flex;
   flex-direction: column;
   justify-content: normal;
   align-items: center;
-  width: 90%;
   border: 2px solid sandybrown;
   padding: 20px; }
   .comment_wrapper form {
@@ -54,5 +55,34 @@ textarea {
     background: #22903b;
     color: white;
     border: none; }
+
+.comment_of_user {
+  display: grid;
+  grid-template-rows: 64px 1fr;
+  grid-template-columns: 64px 80px 1fr;
+  align-self: flex-start;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 20px; }
+  .comment_of_user .user_name {
+    font-weight: bold;
+    font-size: 25px;
+    max-width: 100px; }
+  .comment_of_user .avatar {
+    grid-row: 1/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: normal;
+    padding-right: 10px; }
+  .comment_of_user .entered_message {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    max-width: 90%;
+    word-break: break-all; }
+  .comment_of_user .time {
+    max-width: 100px;
+    justify-self: flex-start; }
 
 /*# sourceMappingURL=Comment.css.map */

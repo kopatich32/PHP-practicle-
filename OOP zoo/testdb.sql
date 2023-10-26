@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 26 2023 г., 17:15
--- Версия сервера: 8.0.30
--- Версия PHP: 8.0.22
+-- Время создания: Окт 24 2023 г., 21:05
+-- Версия сервера: 10.8.4-MariaDB
+-- Версия PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,38 +18,36 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `comment`
+-- База данных: `testdb`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `message`
+-- Структура таблицы `zoo`
 --
 
-CREATE TABLE `message` (
-  `id` int NOT NULL,
-  `user` varchar(50) NOT NULL,
-  `message` varchar(600) NOT NULL,
-  `date` text NOT NULL
+CREATE TABLE `zoo` (
+  `id` int(11) NOT NULL,
+  `animal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Дамп данных таблицы `message`
+-- Дамп данных таблицы `zoo`
 --
 
-INSERT INTO `message` (`id`, `user`, `message`, `date`) VALUES
-(1, 'Alesha', 'asdasdasd', '26-10-2023 16:53:21'),
-(2, 'k', 'reseswe', '26-10-2023 16:57:39');
+INSERT INTO `zoo` (`id`, `animal`) VALUES
+(1, 'котяра'),
+(2, 'Собака');
 
 --
 -- Индексы сохранённых таблиц
 --
 
 --
--- Индексы таблицы `message`
+-- Индексы таблицы `zoo`
 --
-ALTER TABLE `message`
+ALTER TABLE `zoo`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -57,10 +55,10 @@ ALTER TABLE `message`
 --
 
 --
--- AUTO_INCREMENT для таблицы `message`
+-- AUTO_INCREMENT для таблицы `zoo`
 --
-ALTER TABLE `message`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `zoo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
