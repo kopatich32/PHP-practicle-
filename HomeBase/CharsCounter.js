@@ -1,4 +1,3 @@
-console.log('lala')
 let counter = document.querySelector('.counter');
 let textarea = document.querySelector('#message');
 let sendBtn = document.querySelector('.send');

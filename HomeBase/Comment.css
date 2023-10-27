@@ -1,6 +1,7 @@
 * {
   padding: 0;
-  margin: 0; }
+  margin: 0;
+  box-sizing: border-box; }
 
 body {
   display: flex;
@@ -58,9 +59,11 @@ textarea {
 
 .comment_of_user {
   margin-top: 20px;
-  border: 2px solid black;
-  border-radius: 20px;
-  padding: 20px; }
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  min-height: 60px;
+  width: 100%; }
   .comment_of_user .comment_header {
     display: flex;
     flex-direction: row;
@@ -78,5 +81,26 @@ textarea {
     margin: -30px 0 0 70px;
     max-width: 90%;
     word-break: break-all; }
+  .comment_of_user .edit_buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: normal;
+    margin-top: 5px; }
+    .comment_of_user .edit_buttons button {
+      border: none;
+      box-shadow: 0 0 2px black;
+      padding: 5px;
+      background: none;
+      transition: .5s; }
+      .comment_of_user .edit_buttons button:hover {
+        cursor: pointer; }
+    .comment_of_user .edit_buttons .edit {
+      margin-right: 10px; }
+      .comment_of_user .edit_buttons .edit:hover {
+        background: rgba(45, 157, 111, 0.61);
+        transition: .5s; }
+    .comment_of_user .edit_buttons .delete:hover {
+      background: rgba(180, 36, 36, 0.85); }
 
 /*# sourceMappingURL=Comment.css.map */

@@ -40,13 +40,7 @@
     $out = $db->query("SELECT * FROM `message`");
     $row1 = $out->fetch_row();
     ?>
-<!--<pre>-->
-<!--    --><?php
-//    while($res = $out->fetch_object()){
-//    print_r($res);
-//    }?>
-<!---->
-<!--</pre>-->
+
 <?php
 while($row3 = $out->fetch_assoc()){ ?>
     <div class="comment_of_user">
@@ -55,13 +49,19 @@ while($row3 = $out->fetch_assoc()){ ?>
                 <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
             </div>
             <div class="user_name">KotE</div>
-            <div class="time"><?php echo $row3['date']?></div>
+            <div class="time"><?= $row3['date']?></div>
         </div>
-        <div class="entered_message"><?php echo $row3['message']?></div>
+        <div class="entered_message"><?= $row3['message'] ?></div>
+
+        <div class="edit_buttons">
+            <button class="edit">Редактировать</button>
+            <button class="delete">Удалить</button>
+        </div>
     </div>
+
 <?php } ?>
 </div>
-
 <script src="CharsCounter.js"></script>
+<script src="EditComment.js"></script>
 </body>
 </html>
