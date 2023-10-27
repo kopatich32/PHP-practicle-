@@ -15,11 +15,12 @@
             <div class="symbols">Осталось символов</div>
             <div class="counter"></div>
         </div>
-        <form method="POST">
+
+        <form method="POST" name="commentArea">
             <textarea id="message" placeholder="Комментарий" maxlength="100" name="comment"></textarea>
             <div class="buttons">
                 <button class="close" hidden>Закрыть</button>
-                <button class="send" type="submit" name="send">Отправть</button>
+                <button class="send" type="submit" name="send">Отправить</button>
                 <div id="out"></div>
             </div>
         </form>
@@ -29,39 +30,38 @@
     if($db->connect_errno):
         echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
     endif;
-    if(isset($_POST['send'])){
+    if(isset($_POST['send']) or isset($_POST['comment']) ){
         $time_of_message = date('d-m-Y H:i:s');
         $text_of_message = $_POST['comment'];
-        $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES (null,'$text_of_message','$time_of_message')");
+       $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
+
     }
+
+    $out = $db->query("SELECT * FROM `message`");
+    $row1 = $out->fetch_row();
     ?>
+<!--<pre>-->
+<!--    --><?php
+//    while($res = $out->fetch_object()){
+//    print_r($res);
+//    }?>
+<!---->
+<!--</pre>-->
+<?php
+while($row3 = $out->fetch_assoc()){ ?>
     <div class="comment_of_user">
         <div class="comment_header">
             <div class="avatar">
                 <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
             </div>
-            <div class="user_name">Kote</div>
-            <div class="time">24-10-2023</div>
+            <div class="user_name">KotE</div>
+            <div class="time"><?php echo $row3['date']?></div>
         </div>
-        <div class="entered_message"><?php if(isset($text_of_message)){echo $text_of_message;}?></div>
+        <div class="entered_message"><?php echo $row3['message']?></div>
     </div>
+<?php } ?>
 </div>
 
-
-
-<script>
-    let counter = document.querySelector('.counter');
-    let textarea = document.querySelector('#message');
-    let messageLength = textarea.getAttribute('maxlength');
-    counter.innerText = +messageLength;
-    let count =  +counter.innerText;
-    textarea.addEventListener('input', function(){
-        if(count >0){
-            counter.innerText =  count - textarea.value.length;
-            console.log(counter.innerText)
-        }
-    })
-</script>
-
+<script src="CharsCounter.js"></script>
 </body>
 </html>

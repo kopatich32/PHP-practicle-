@@ -63,6 +63,9 @@ textarea{
 }
 .comment_of_user{
   margin-top: 20px;
+  border: 2px solid black;
+    border-radius: 20px;
+    padding: 20px;
   .comment_header{
     @include flex(row,flex-start,normal);
     line-height: 100%;

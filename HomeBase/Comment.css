@@ -57,7 +57,10 @@ textarea {
     border: none; }
 
 .comment_of_user {
-  margin-top: 20px; }
+  margin-top: 20px;
+  border: 2px solid black;
+  border-radius: 20px;
+  padding: 20px; }
   .comment_of_user .comment_header {
     display: flex;
     flex-direction: row;
