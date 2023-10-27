@@ -24,29 +24,29 @@
             </div>
         </form>
     </div>
+    <?php
+    $db = @new mysqli('localhost','root','','comment');
+    if($db->connect_errno):
+        echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
+    endif;
+    if(isset($_POST['send'])){
+        $time_of_message = date('d-m-Y H:i:s');
+        $text_of_message = $_POST['comment'];
+        $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES (null,'$text_of_message','$time_of_message')");
+    }
+    ?>
     <div class="comment_of_user">
-        <div class="avatar">
-            <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
+        <div class="comment_header">
+            <div class="avatar">
+                <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
+            </div>
+            <div class="user_name">Kote</div>
+            <div class="time">24-10-2023</div>
         </div>
-        <div class="user_name">Kote</div>
-        <div class="time">24-10-2023</div>
-        <div class="entered_message"> lalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalallalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalallalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalallalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalallalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalala
-        </div>
+        <div class="entered_message"><?php if(isset($text_of_message)){echo $text_of_message;}?></div>
     </div>
 </div>
-<?php
-$db = @new mysqli('localhost','root','','comment');
-if($db->connect_errno):
-    echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
- endif;
-if(isset($_POST['send'])){
-    $time_of_message = date('d-m-Y H:i:s');
-    $text_of_message = $_POST['comment'];
-    echo $time_of_message;
-    echo '<br>' . $text_of_message;
-    $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('k','$text_of_message','$time_of_message')");
-}
-?>
+
 
 
 <script>
