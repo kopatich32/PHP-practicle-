@@ -1,3 +1,21 @@
+<?php
+$db = @new mysqli('localhost','root','','comment');
+if($db->connect_errno):
+    echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
+endif;
+if(isset($_POST['send'])  ){
+    $time_of_message = date('d-m-Y H:i:s');
+    $text_of_message = $_POST['comment'];
+    $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
+
+}
+$out = $db->query("SELECT * FROM `message`");
+
+if(isset($_POST['close'])){
+    $del = $db->query("DELETE FROM `message` WHERE `id` > 40;");
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -19,31 +37,16 @@
         <form method="POST" name="commentArea">
             <textarea id="message" placeholder="Комментарий" maxlength="100" name="comment"></textarea>
             <div class="buttons">
-                <button class="close" hidden>Закрыть</button>
+                <button class="close" name="close">Закрыть</button>
                 <button class="send" type="submit" name="send">Отправить</button>
                 <div id="out"></div>
             </div>
         </form>
     </div>
-    <?php
-    $db = @new mysqli('localhost','root','','comment');
-    if($db->connect_errno):
-        echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
-    endif;
-    if(isset($_POST['send']) or isset($_POST['comment']) ){
-        $time_of_message = date('d-m-Y H:i:s');
-        $text_of_message = $_POST['comment'];
-       $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
-
-    }
-
-    $out = $db->query("SELECT * FROM `message`");
-    $row1 = $out->fetch_row();
-    ?>
 
 <?php
 while($row3 = $out->fetch_assoc()){ ?>
-    <div class="comment_of_user">
+    <div class="comment_of_user comm_num_<?= $row3['id'] ?>">
         <div class="comment_header">
             <div class="avatar">
                 <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
@@ -54,8 +57,10 @@ while($row3 = $out->fetch_assoc()){ ?>
         <div class="entered_message"><?= $row3['message'] ?></div>
 
         <div class="edit_buttons">
+
             <button class="edit">Редактировать</button>
-            <button class="delete">Удалить</button>
+            <form id="data" method="POST"></form>
+            <button class="delete" name="admin_del_btn" form="data" type="submit">Удалить</button>
         </div>
     </div>
 
