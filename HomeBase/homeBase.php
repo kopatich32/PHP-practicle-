@@ -1,21 +1,25 @@
 <?php
-$db = @new mysqli('localhost','root','','comment');
-if($db->connect_errno):
+
+$db = @new mysqli('localhost', 'root', '', 'comment');
+if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
-if(isset($_POST['send'])  ){
+
+if(isset($_POST['send'])){
     $time_of_message = date('d-m-Y H:i:s');
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
+}
+
+if (isset($_GET['del'])){
+    $current_id = $_GET['del'];
+    $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
 
 }
 $out = $db->query("SELECT * FROM `message`");
 
-if(isset($_POST['close'])){
-    $del = $db->query("DELETE FROM `message` WHERE `id` > 40;");
-}
-?>
 
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -44,10 +48,15 @@ if(isset($_POST['close'])){
         </form>
     </div>
 
+
+
+
+
 <?php
-while($row3 = $out->fetch_assoc()){ ?>
-    <div class="comment_of_user comm_num_<?= $row3['id'] ?>">
-        <div class="comment_header">
+
+    while($row3 = $out->fetch_assoc()){?>
+        <div class="comment_of_user num_<?= $row3['id'] ?>">
+    <div class="comment_header">
             <div class="avatar">
                 <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
             </div>
@@ -57,16 +66,37 @@ while($row3 = $out->fetch_assoc()){ ?>
         <div class="entered_message"><?= $row3['message'] ?></div>
 
         <div class="edit_buttons">
-
-            <button class="edit">Редактировать</button>
-            <form id="data" method="POST"></form>
-            <button class="delete" name="admin_del_btn" form="data" type="submit">Удалить</button>
+            <a href="?refactor">
+                <button class="edit" name="edit">Редактировать</button>
+            </a>
+            <a href="homeBase.php?del=<?= $row3['id']?>">
+                <button class="delete" name="admin_del_btn">Удалить</button>
+            </a>
         </div>
     </div>
 
 <?php } ?>
-</div>
+
+
+    <div class="confirm_delete_message">
+        Вы точно хотите удалить сообщение?
+        <button class="yes">Да</button>
+        <button class="no">Нет</button>
+    </div>
+    <script>
+        let confirmWindow = document.querySelector('.confirm_delete_message');
+        let yes = document.querySelector('.yes');
+        let no = document.querySelector('.no');
+        confirmWindow.addEventListener('click', function(e){
+if(e.target.innerHTML === yes.innerHTML){
+    confirmWindow.style.display ='none'
+
+})
+            console.log('lala')
+        })
+
+    </script>
 <script src="CharsCounter.js"></script>
-<script src="EditComment.js"></script>
+<!--<script src="EditComment.js"></script>-->
 </body>
 </html>

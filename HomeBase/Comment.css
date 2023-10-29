@@ -104,4 +104,13 @@ textarea {
     .comment_of_user .edit_buttons .delete:hover {
       background: rgba(180, 36, 36, 0.85); }
 
+.confirm_delete_message {
+  display: block;
+  border: 2px solid red;
+  padding: 50px;
+  text-align: center; }
+  .confirm_delete_message button {
+    width: 40px;
+    padding: 10px 0; }
+
 /*# sourceMappingURL=Comment.css.map */
