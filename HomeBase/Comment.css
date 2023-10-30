@@ -105,12 +105,36 @@ textarea {
       background: rgba(180, 36, 36, 0.85); }
 
 .confirm_delete_message {
-  display: block;
-  border: 2px solid red;
-  padding: 50px;
-  text-align: center; }
-  .confirm_delete_message button {
-    width: 40px;
-    padding: 10px 0; }
+  visibility: hidden;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  text-align: center;
+  width: 140px;
+  padding: 10px 0;
+  background: white; }
+  .confirm_delete_message::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    border-top: 15px solid black;
+    border-right: 15px solid transparent;
+    border-left: 15px solid transparent; }
+  .confirm_delete_message::before {
+    content: '';
+    position: absolute;
+    bottom: -14px;
+    border-top: 14px solid white;
+    border-right: 14px solid transparent;
+    border-left: 14px solid transparent;
+    z-index: 100; }
+  .confirm_delete_message .choose .yes, .confirm_delete_message .choose .no {
+    padding: 0 10px 0 10px;
+    margin-top: 6px; }
+  .confirm_delete_message .choose .yes {
+    margin-right: 10px; }
 
 /*# sourceMappingURL=Comment.css.map */

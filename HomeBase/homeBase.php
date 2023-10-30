@@ -1,5 +1,4 @@
 <?php
-
 $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
@@ -10,14 +9,11 @@ if(isset($_POST['send'])){
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
 }
-
 if (isset($_GET['del'])){
     $current_id = $_GET['del'];
     $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
-
 }
 $out = $db->query("SELECT * FROM `message`");
-
 
 ?>
 <!doctype html>
@@ -53,7 +49,6 @@ $out = $db->query("SELECT * FROM `message`");
 
 
 <?php
-
     while($row3 = $out->fetch_assoc()){?>
         <div class="comment_of_user num_<?= $row3['id'] ?>">
     <div class="comment_header">
@@ -64,39 +59,26 @@ $out = $db->query("SELECT * FROM `message`");
             <div class="time"><?= $row3['date']?></div>
         </div>
         <div class="entered_message"><?= $row3['message'] ?></div>
-
         <div class="edit_buttons">
-            <a href="?refactor">
-                <button class="edit" name="edit">Редактировать</button>
+            <a class="edit" href="?refactor=<?= $row3['id'] ?>">
+                <button  name="edit">Редактировать</button>
             </a>
-            <a href="homeBase.php?del=<?= $row3['id']?>">
-                <button class="delete" name="admin_del_btn">Удалить</button>
+            <a class="delete" href="?del=<?= $row3['id'] ?>" ">
+                <button  name="admin_del_btn">Удалить</button>
             </a>
         </div>
     </div>
-
 <?php } ?>
 
-
     <div class="confirm_delete_message">
-        Вы точно хотите удалить сообщение?
-        <button class="yes">Да</button>
-        <button class="no">Нет</button>
+        <p>Удалить?</p>
+        <div class="choose">
+            <button class="yes">Да</button>
+            <button class="no">Нет</button>
+        </>
     </div>
-    <script>
-        let confirmWindow = document.querySelector('.confirm_delete_message');
-        let yes = document.querySelector('.yes');
-        let no = document.querySelector('.no');
-        confirmWindow.addEventListener('click', function(e){
-if(e.target.innerHTML === yes.innerHTML){
-    confirmWindow.style.display ='none'
-
-})
-            console.log('lala')
-        })
-
-    </script>
+</div>
 <script src="CharsCounter.js"></script>
-<!--<script src="EditComment.js"></script>-->
+<script src="EditComment.js"></script>
 </body>
 </html>
