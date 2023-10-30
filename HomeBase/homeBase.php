@@ -3,16 +3,23 @@ $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
+$time_of_message = date('d-m-Y H:i:s');
 
 if(isset($_POST['send'])){
-    $time_of_message = date('d-m-Y H:i:s');
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
 }
+$current_id = $_GET['del'];
+
 if (isset($_GET['del'])){
-    $current_id = $_GET['del'];
     $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
 }
+if (isset($_GET['refactor'])){
+    $refactor_id = $_GET['refactor'];
+    $del = $db->query("UPDATE `message` SET `user`='newUSer',`message`='$refactor_id',`date`='$time_of_message' WHERE `id` = $current_id");
+}
+
+
 $out = $db->query("SELECT * FROM `message`");
 
 ?>
@@ -50,6 +57,7 @@ $out = $db->query("SELECT * FROM `message`");
 
 <?php
     while($row3 = $out->fetch_assoc()){?>
+
         <div class="comment_of_user num_<?= $row3['id'] ?>">
     <div class="comment_header">
             <div class="avatar">
@@ -58,24 +66,25 @@ $out = $db->query("SELECT * FROM `message`");
             <div class="user_name">KotE</div>
             <div class="time"><?= $row3['date']?></div>
         </div>
-        <div class="entered_message"><?= $row3['message'] ?></div>
+        <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
         <div class="edit_buttons">
-            <a class="edit" href="?refactor=<?= $row3['id'] ?>">
+            <a class="edit">
+<!--                href="?refactor=--><?php //= $row3['id'] ?><!--">-->
                 <button  name="edit">Редактировать</button>
             </a>
-            <a class="delete" href="?del=<?= $row3['id'] ?>" ">
+            <a class="delete" href="?del=<?= $row3['id'] ?>">
                 <button  name="admin_del_btn">Удалить</button>
             </a>
         </div>
     </div>
-<?php } ?>
-
+<?php }?>
     <div class="confirm_delete_message">
         <p>Удалить?</p>
         <div class="choose">
+
             <button class="yes">Да</button>
             <button class="no">Нет</button>
-        </>
+        </div>
     </div>
 </div>
 <script src="CharsCounter.js"></script>
