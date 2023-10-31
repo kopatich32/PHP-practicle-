@@ -3,21 +3,22 @@ $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
-$time_of_message = date('d-m-Y H:i:s');
 
 if(isset($_POST['send'])){
+    $time_of_message = date('d-m-Y H:i:s');
+
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
 }
-$current_id = $_GET['del'];
 
 if (isset($_GET['del'])){
+    $current_id = $_GET['del'];
     $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
 }
-if (isset($_GET['refactor'])){
-    $refactor_id = $_GET['refactor'];
-    $del = $db->query("UPDATE `message` SET `user`='newUSer',`message`='$refactor_id',`date`='$time_of_message' WHERE `id` = $current_id");
-}
+//if (isset($_GET['refactor'])){
+//    $refactor_id = $_GET['refactor'];
+//    $del = $db->query("UPDATE `message` SET `user`='newUSer',`message`='$refactor_id',`date`='$time_of_message' WHERE `id` = $current_id");
+//}
 
 
 $out = $db->query("SELECT * FROM `message`");

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Окт 26 2023 г., 17:15
+-- Время создания: Окт 31 2023 г., 15:52
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -32,15 +32,15 @@ CREATE TABLE `message` (
   `user` varchar(50) NOT NULL,
   `message` varchar(600) NOT NULL,
   `date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `message`
 --
 
 INSERT INTO `message` (`id`, `user`, `message`, `date`) VALUES
-(1, 'Alesha', 'asdasdasd', '26-10-2023 16:53:21'),
-(2, 'k', 'reseswe', '26-10-2023 16:57:39');
+(162, 'lala', 'dadad', '31-10-2023 15:50:54'),
+(163, 'lala', 'fbbfdb', '31-10-2023 15:51:52');
 
 --
 -- Индексы сохранённых таблиц
@@ -60,7 +60,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT для таблицы `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=164;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
