@@ -32,7 +32,9 @@ CREATE TABLE `message` (
   `user` varchar(50) NOT NULL,
   `message` varchar(600) NOT NULL,
   `date` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- utf8mb4_0900_ai_ci;
+-- utf8mb4_unicode_ci
 
 --
 -- Дамп данных таблицы `message`

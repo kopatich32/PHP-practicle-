@@ -7,9 +7,9 @@ let no = document.querySelector('.no');
 deleteBtn.forEach(item => {
 
     item.addEventListener('click', event => {
-        // event.preventDefault();
+        event.preventDefault();
         if (item.contains(event.target)) {
-            // confirmWindow.style.visibility = 'visible';
+            confirmWindow.style.visibility = 'visible';
         }
 
         let questionBlock = item.getBoundingClientRect()
@@ -23,7 +23,9 @@ deleteBtn.forEach(item => {
 //Edit message
 
 editBtn.forEach(item => {
+
     item.addEventListener('click', event => {
+        event.preventDefault();
         let thisMessage = event.target.closest('.edit_buttons').previousElementSibling;
         if (item.contains(event.target)) {
             item.firstElementChild.innerText = 'Сохранить';
