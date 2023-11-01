@@ -10,7 +10,6 @@ if(isset($_POST['send'])){
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
 }
-$current_id = $_GET['del'];
 
 if (isset($_GET['del'])){
     $current_id = $_GET['del'];
@@ -83,11 +82,13 @@ $out = $db->query("SELECT * FROM `message`");
 
     <div class="confirm_delete_message">
         <p>Удалить?</p>
-            <a href="?del=<?= $row3['id'] ?>">
+        <div class="choose">
+
+        <a href="?del=<?= $row3['id'] ?>">
             <button class="yes" name="yes" type="submit">Да</button>
             </a>
-
             <button class="no">Нет</button>
+        </div>
     </div>
     <?php }?>
 

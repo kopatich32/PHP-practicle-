@@ -11,7 +11,7 @@ body {
   width: 100%;
   height: 100vh; }
   body .container {
-    width: 90%; }
+    width: 88%; }
 
 .comment_wrapper {
   margin-top: 100px;
@@ -112,7 +112,6 @@ textarea {
   justify-content: center;
   align-items: center;
   border: 1px solid black;
-  text-align: center;
   width: 140px;
   padding: 10px 0;
   background: white; }
@@ -131,6 +130,8 @@ textarea {
     border-right: 14px solid transparent;
     border-left: 14px solid transparent;
     z-index: 100; }
+  .confirm_delete_message .choose a {
+    text-decoration: none; }
   .confirm_delete_message .choose .yes, .confirm_delete_message .choose .no {
     padding: 0 10px 0 10px;
     margin-top: 6px; }
