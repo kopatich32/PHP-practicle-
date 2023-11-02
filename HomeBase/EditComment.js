@@ -51,12 +51,8 @@ editBtn.forEach(item => {
             },500);
             thisMessage.focus();
         }
-        // thisMessage.addEventListener('blur', function(){
-        //     item.firstElementChild.innerText = 'Редактировать';
-        //     // thisMessage.setAttribute('contenteditable', "false")
-        //
-        //
-        // })
+
+
         if(item.contains(event.target) && item.firstElementChild.innerText === 'Сохранить'){
             item.onclick = ()=>{
                 thisMessage.removeAttribute('contenteditable');
@@ -72,3 +68,23 @@ editBtn.forEach(item => {
 no.addEventListener('click',()=>{
     confirmWindow.style.visibility = 'hidden';
 })
+let thisMess = document.querySelector('.entered_message');
+thisMess.addEventListener('blur', function (event) {
+        console.log('lalal')
+        // item.firstElementChild.innerText = 'Редактировать';
+        // thisMessage.setAttribute('contenteditable', "false");
+        fetch('/homeBase.php',{
+            method: "POST",
+            body: new FormData(document.forms.showed_mess)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+
+        })
+
+    })
+
+
+
+

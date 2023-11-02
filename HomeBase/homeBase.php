@@ -22,7 +22,6 @@ if (isset($_GET['del'])){
 
 
 $out = $db->query("SELECT * FROM `message`");
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -51,15 +50,11 @@ $out = $db->query("SELECT * FROM `message`");
             </div>
         </form>
     </div>
-
-
-
-
-
 <?php
     while($row3 = $out->fetch_assoc()){?>
 
-        <div class="comment_of_user num_<?= $row3['id'] ?>">
+        <div   class="comment_of_user num_<?= $row3['id'] ?>">
+            <form method="POST" name="showed_mess">
     <div class="comment_header">
             <div class="avatar">
                 <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
@@ -67,7 +62,9 @@ $out = $db->query("SELECT * FROM `message`");
             <div class="user_name">KotE</div>
             <div class="time"><?= $row3['date']?></div>
         </div>
-        <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
+            </form>
+
+            <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
         <div class="edit_buttons">
             <a class="edit" href="?refactor=<?= $row3['id'] ?>">
                 <button  name="edit">Редактировать</button>
@@ -91,8 +88,13 @@ $out = $db->query("SELECT * FROM `message`");
         </div>
     </div>
     <?php }?>
+<!--Sirabette Formdata-->
 
+    <script>
+        fetch('homeBase.php',{
 
+        })
+    </script>
 </div>
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
