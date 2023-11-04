@@ -80,7 +80,8 @@ textarea {
       opacity: .6; }
   .comment_of_user .entered_message {
     margin: -30px 0 0 70px;
-    max-width: 90%;
+    width: 88%;
+    height: 60px;
     word-break: break-all; }
   .comment_of_user .edit_buttons {
     display: flex;

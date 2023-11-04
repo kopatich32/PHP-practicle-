@@ -1,19 +1,21 @@
 
 
-
-
 <?php
 $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
 ////
-//$text = $_POST['OLO'];
-//$query6 = $db->query("INSERT INTO `message`( `user`, `message`, `date`) VALUES ('ololo','$text','121313')");
+if(isset($_POST['message'])){
+    $text = $_POST['message'];
+    $edit_id = $_GET['refactor'];
+    echo 'asasasasa';
+//    $query6 = $db->query("UPDATE `message` SET `user`='lala',`message`='$text',`date`='$time_of_message' WHERE `id` = '$edit_id'");
+    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 262");
+}
 //////
 if(isset($_POST['send'])){
     $time_of_message = date('d-m-Y H:i:s');
-
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
 }
@@ -22,10 +24,6 @@ if (isset($_GET['del'])){
     $current_id = $_GET['del'];
     $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
 }
-//if (isset($_GET['refactor'])){
-//    $refactor_id = $_GET['refactor'];
-//    $del = $db->query("UPDATE `message` SET `user`='newUSer',`message`='$refactor_id',`date`='$time_of_message' WHERE `id` = $current_id");
-//}
 
 $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 ?>
@@ -68,11 +66,12 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             <div class="user_name">KotE</div>
             <div class="time"><?= $row3['date']?></div>
         </div>
-            <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
+            <input class="entered_message" maxlength="100"  name="message" contenteditable="false" value="<?= $row3['message'] ?>">
+
             <div class="edit_buttons">
             <a class="edit" href="?refactor=<?= $row3['id'] ?>">
                 <button class="editBtn"  name="edit">Редактировать</button>
-                <button class="save" type="submit"  name="save">Сохранить</button>
+                <button class="save" name="save">Сохранить</button>
             </a>
             <a class="delete">
 <!--                href="?del=--><?php //= $row3['id'] ?><!--">-->
@@ -80,6 +79,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             </a>
         </div>
             </form>
+
         </div>
     <div class="confirm_delete_message">
         <p>Удалить?</p>

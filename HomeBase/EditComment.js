@@ -1,9 +1,9 @@
 
-let editBtn = document.querySelectorAll('.editBtn');
+let editBtn = document.querySelectorAll('.edit');
 let deleteBtn = document.querySelectorAll('.delete');
 let confirmWindow = document.querySelector('.confirm_delete_message');
 let no = document.querySelector('.no');
-let saveBtn = document.querySelector('.save');
+let saveBtn = document.querySelectorAll('.save');
 
 
 // For JS -PHP
@@ -39,8 +39,9 @@ deleteBtn.forEach(item => {
     })
 })
 
+
+
 //Edit message
-console.log(saveBtn)
 editBtn.forEach(item => {
 
     item.addEventListener('click', event => {
@@ -49,13 +50,9 @@ editBtn.forEach(item => {
         if (item.contains(event.target)) {
             thisMessage.removeAttribute('contenteditable');
             thisMessage.setAttribute('contenteditable', "true");
-            item.style.display = 'none';
-            saveBtn.style.display = 'block';
-            saveBtn.addEventListener('click',e=>{
-                e.preventDefault();
-                saveBtn.style.display = 'none';
-                item.style.display = 'block'
-            })
+            item.firstElementChild.style.display = 'none';
+            item.lastElementChild.style.display = 'block';
+
             thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
             thisMessage.style.transition = '1s';
             thisMessage.style.padding = '5px 0';
@@ -67,13 +64,14 @@ editBtn.forEach(item => {
         }
 
 
+
 // let myFormData = document.forms.showed_mess;
 //      let formdata = new FormData();
 //    formdata.set('message', thisMessage.innerText);
 //         for (let row of formdata) {
 //             console.log(row)
 //         }
-//         fetch ('/homeBase.php/', {
+//         fetch ('/homeBase.php', {
 //             method: 'POST',
 //             body: formdata
 //         })
@@ -84,7 +82,27 @@ editBtn.forEach(item => {
     })
 })
 
+saveBtn.forEach(item=>{
+    item.onclick = e=>{
+        e.preventDefault()
+        item.style.display = 'none';
+        item.previousElementSibling.style.display = 'block';
+        e.stopPropagation()
+        let form = document.forms.showed_mess;
+        let formData = new FormData(form);
+       let text = document.querySelector('.entered_message').value;
+       formData.set('mess', text);
+        fetch('/HomeBase/homeBase.php', {
+            method: "POST",
+            body: formData
+        })
+            .then(response => console.log(response.json()))
 
+    }
+
+
+
+})
 
 no.addEventListener('click', () => {
     confirmWindow.style.visibility = 'hidden';
