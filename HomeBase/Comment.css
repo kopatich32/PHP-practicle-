@@ -103,6 +103,10 @@ textarea {
         transition: .5s; }
     .comment_of_user .edit_buttons .delete:hover {
       background: rgba(180, 36, 36, 0.85); }
+    .comment_of_user .edit_buttons a {
+      text-decoration: none; }
+    .comment_of_user .edit_buttons .save {
+      display: none; }
 
 .confirm_delete_message {
   visibility: hidden;

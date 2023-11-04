@@ -1,9 +1,16 @@
+
+
+
+
 <?php
 $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
-
+////
+//$text = $_POST['OLO'];
+//$query6 = $db->query("INSERT INTO `message`( `user`, `message`, `date`) VALUES ('ololo','$text','121313')");
+//////
 if(isset($_POST['send'])){
     $time_of_message = date('d-m-Y H:i:s');
 
@@ -20,8 +27,7 @@ if (isset($_GET['del'])){
 //    $del = $db->query("UPDATE `message` SET `user`='newUSer',`message`='$refactor_id',`date`='$time_of_message' WHERE `id` = $current_id");
 //}
 
-
-$out = $db->query("SELECT * FROM `message`");
+$out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 ?>
 <!doctype html>
 <html lang="en">
@@ -51,8 +57,8 @@ $out = $db->query("SELECT * FROM `message`");
         </form>
     </div>
 <?php
-    while($row3 = $out->fetch_assoc()){?>
 
+    while($row3 = $out->fetch_assoc()){?>
         <div   class="comment_of_user num_<?= $row3['id'] ?>">
             <form method="POST" name="showed_mess">
     <div class="comment_header">
@@ -62,21 +68,19 @@ $out = $db->query("SELECT * FROM `message`");
             <div class="user_name">KotE</div>
             <div class="time"><?= $row3['date']?></div>
         </div>
-            </form>
-
             <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
-        <div class="edit_buttons">
+            <div class="edit_buttons">
             <a class="edit" href="?refactor=<?= $row3['id'] ?>">
-                <button  name="edit">Редактировать</button>
+                <button class="editBtn"  name="edit">Редактировать</button>
+                <button class="save" type="submit"  name="save">Сохранить</button>
             </a>
             <a class="delete">
 <!--                href="?del=--><?php //= $row3['id'] ?><!--">-->
                 <button  name="admin_del_btn">Удалить</button>
             </a>
         </div>
-    </div>
-
-
+            </form>
+        </div>
     <div class="confirm_delete_message">
         <p>Удалить?</p>
         <div class="choose">
@@ -88,14 +92,8 @@ $out = $db->query("SELECT * FROM `message`");
         </div>
     </div>
     <?php }?>
-<!--Sirabette Formdata-->
-
-    <script>
-        fetch('homeBase.php',{
-
-        })
-    </script>
 </div>
+
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
 </body>

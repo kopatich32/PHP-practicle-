@@ -117,7 +117,12 @@ textarea{
         background: rgba(180, 36, 36, 0.85);
       }
     }
-
+    a{
+      text-decoration: none;
+    }
+    .save{
+      display: none;
+    }
   }
 
 }
@@ -148,6 +153,7 @@ border: 1px solid black;
     border-left: 14px solid transparent;
     z-index: 100;
   }
+
  .choose{
    a{
      text-decoration: none;
