@@ -11,7 +11,7 @@ if(isset($_POST['message'])){
     $edit_id = $_GET['refactor'];
     echo 'asasasasa';
 //    $query6 = $db->query("UPDATE `message` SET `user`='lala',`message`='$text',`date`='$time_of_message' WHERE `id` = '$edit_id'");
-    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 262");
+    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 203");
 }
 //////
 if(isset($_POST['send'])){
