@@ -97,9 +97,9 @@ textarea {
       transition: .5s; }
       .comment_of_user .edit_buttons button:hover {
         cursor: pointer; }
-    .comment_of_user .edit_buttons .edit {
+    .comment_of_user .edit_buttons .editBtn, .comment_of_user .edit_buttons .save {
       margin-right: 10px; }
-      .comment_of_user .edit_buttons .edit:hover {
+      .comment_of_user .edit_buttons .editBtn:hover, .comment_of_user .edit_buttons .save:hover {
         background: rgba(45, 157, 111, 0.61);
         transition: .5s; }
     .comment_of_user .edit_buttons .delete:hover {

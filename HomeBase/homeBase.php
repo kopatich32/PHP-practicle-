@@ -1,26 +1,41 @@
-
-
 <?php
 $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
 ////
-if(isset($_POST['message'])){
-    $text = $_POST['message'];
+//    $text = @$_GET['message'];
+//    print_r(@$_POST['message']);
+
+//if (isset($_POST['message'])) {
+//    $edit_id = $_GET['refactor'];
+//    $text = @$_POST['message'];
+//    print_r(@$_POST['message']);
+//    print_r($edit_id);
+//    print_r($_GET['refactor']);
+//    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 410");
+//}
+
+if (isset($_GET['refactor'])) {
     $edit_id = $_GET['refactor'];
-    echo 'asasasasa';
-//    $query6 = $db->query("UPDATE `message` SET `user`='lala',`message`='$text',`date`='$time_of_message' WHERE `id` = '$edit_id'");
-    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 203");
+//    $text = @$_POST['message'];
+//    print_r(@$_POST['message']);
+//    print_r($edit_id);
+    print_r($_GET['refactor']);
+//    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = '$edit_id'");
 }
+
+
+
+
 //////
-if(isset($_POST['send'])){
+if (isset($_POST['send'])) {
     $time_of_message = date('d-m-Y H:i:s');
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
 }
 
-if (isset($_GET['del'])){
+if (isset($_GET['del'])) {
     $current_id = $_GET['del'];
     $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
 }
@@ -54,44 +69,49 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             </div>
         </form>
     </div>
-<?php
+    <?php
 
-    while($row3 = $out->fetch_assoc()){?>
-        <div   class="comment_of_user num_<?= $row3['id'] ?>">
-            <form method="POST" name="showed_mess">
-    <div class="comment_header">
-            <div class="avatar">
-                <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
+    while ($row3 = $out->fetch_assoc()) {
+        ?>
+
+        <div class="comment_of_user num_<?= $row3['id'] ?>">
+            <input name="val" value="<?= $row3['id'] ?>">
+            <div class="comment_header">
+                <div class="avatar">
+                    <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
+                </div>
+                <div class="user_name">KotE</div>
+                <div class="time"><?= $row3['date'] ?></div>
             </div>
-            <div class="user_name">KotE</div>
-            <div class="time"><?= $row3['date']?></div>
-        </div>
-            <input class="entered_message" maxlength="100"  name="message" contenteditable="false" value="<?= $row3['message'] ?>">
-
-            <div class="edit_buttons">
-            <a class="edit" href="?refactor=<?= $row3['id'] ?>">
-                <button class="editBtn"  name="edit">Редактировать</button>
-                <button class="save" name="save">Сохранить</button>
-            </a>
-            <a class="delete">
-<!--                href="?del=--><?php //= $row3['id'] ?><!--">-->
-                <button  name="admin_del_btn">Удалить</button>
-            </a>
-        </div>
+            <form method="POST" name="showed_mess">
+                <input class="entered_message" maxlength="100" name="message" contenteditable="false"
+                       value="<?= $row3['message'] ?>">
             </form>
 
-        </div>
-    <div class="confirm_delete_message">
-        <p>Удалить?</p>
-        <div class="choose">
+            <div class="edit_buttons">
+                <button class="editBtn" name="edit">Редактировать</button>
 
-        <a href="?del=<?= $row3['id'] ?>">
-            <button class="yes" name="yes" type="submit">Да</button>
-            </a>
-            <button class="no">Нет</button>
+                <a class="edit" href="?refactor=<?= $row3['id'] ?>">
+                    <button class="save" type="submit" name="save">Сохранить</button>
+                </a>
+
+                <a class="delete">
+                    <button name="admin_del_btn">Удалить</button>
+                </a>
+            </div>
+
         </div>
-    </div>
-    <?php }?>
+        <div class="confirm_delete_message">
+            <p>Удалить?</p>
+            <div class="choose">
+
+                <a href="?del=<?= $row3['id'] ?>">
+                    <button class="yes" name="yes" type="submit">Да</button>
+                </a>
+                <button class="no">Нет</button>
+            </div>
+        </div>
+    <?php } ?>
 </div>
 
 <script src="CharsCounter.js"></script>
