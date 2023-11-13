@@ -1,0 +1,177 @@
+* {
+  box-sizing: border-box; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: normal;
+  align-items: normal;
+  width: 98%;
+  height: 100vh; }
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid black;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 80px; }
+  header .cart {
+    border: 2px solid orangered;
+    width: 50px;
+    text-align: center; }
+  header a {
+    text-decoration: none;
+    cursor: pointer;
+    color: black; }
+  header .exit, header .profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    cursor: pointer;
+    border: 2px solid red; }
+  header .exit > button {
+    background: none;
+    border: none;
+    font-size: 20px; }
+  header .user_card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
+    header .user_card .current_user {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+    header .user_card .avatar {
+      width: 40px;
+      height: 40px; }
+      header .user_card .avatar img {
+        width: 100%;
+        height: 100%; }
+
+.card_wrapper {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr); }
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid red;
+  width: 200px;
+  padding-bottom: 20px;
+  margin-bottom: 20px; }
+  .card .picture {
+    padding: 10px;
+    width: 100%;
+    height: 150px; }
+    .card .picture img {
+      width: 90%; }
+  .card .cart {
+    margin-top: 20px; }
+
+.reg_wrapper {
+  display: none;
+  backdrop-filter: blur(5px);
+  position: absolute;
+  width: 100%;
+  height: 100vh; }
+
+.registration {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid orange;
+  box-shadow: 0 0 10px 5px black;
+  width: 450px;
+  height: 150px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; }
+  .registration input:not(input:last-child) {
+    margin-bottom: 20px; }
+  .registration .logup {
+    width: 100px;
+    align-self: stretch;
+    justify-self: flex-end;
+    cursor: pointer; }
+  .registration > .reg {
+    position: absolute;
+    z-index: 100;
+    font-size: 20px;
+    opacity: 1;
+    top: 0; }
+  .registration label {
+    border: 2px solid orange;
+    padding: 2px 8px 2px 8px;
+    height: 30px; }
+  .registration .label {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: 0; }
+    .registration .label .file {
+      opacity: 0;
+      width: 0; }
+    .registration .label span {
+      cursor: pointer;
+      position: relative; }
+  .registration .has_profile {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: 1px solid orchid;
+    padding: 4px;
+    cursor: pointer; }
+
+.first_row, .second_row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
+.auth_wrapper {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(5px); }
+  .auth_wrapper .authForm {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    border: 2px solid orange; }
+    .auth_wrapper .authForm .fields {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+      .auth_wrapper .authForm .fields > input {
+        margin-bottom: 20px; }
+    .auth_wrapper .authForm .login_title {
+      position: absolute;
+      top: 4px;
+      font-size: 20px; }
+
+/*# sourceMappingURL=index.css.map */

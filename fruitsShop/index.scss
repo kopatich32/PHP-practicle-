@@ -1,0 +1,207 @@
+* {
+  box-sizing: border-box;
+}
+
+@mixin flex($direction, $just, $align) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $just;
+  align-items: $align;
+}
+
+body {
+  @include flex(column, normal, normal);
+  width: 98%;
+  height: 100vh;
+}
+
+header {
+  @include flex(row, space-between, center);
+  border: 2px solid black;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 80px;
+
+  .cart {
+    border: 2px solid orangered;
+    width: 50px;
+    text-align: center;
+  }
+
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+  }
+
+  .exit, .profile {
+    @include flex(row, center, center);
+    width: 80px;
+    cursor: pointer;
+    border: 2px solid red;
+  }
+
+  .exit > button {
+    background: none;
+    border: none;
+    font-size: 20px;
+  }
+
+  .user_card {
+    @include flex(row, center, center);
+
+    .current_user{
+  @include flex(column, center, center);
+}
+    .avatar {
+      width: 40px;
+      height: 40px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+
+.card_wrapper {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  @include flex(column, center, center);
+  border: 2px solid red;
+  width: 200px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+
+  .picture {
+    padding: 10px;
+    width: 100%;
+
+    height: 150px;
+
+    img {
+      width: 90%;
+    }
+
+  }
+
+  .cart {
+    margin-top: 20px;
+  }
+}
+
+// Registration Form
+.reg_wrapper {
+  display: none;
+  backdrop-filter: blur(5px);
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+
+}
+
+.registration {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid orange;
+  box-shadow: 0 0 10px 5px black;
+  width: 450px;
+  height: 150px;
+  @include flex(row, center, center);
+
+  input:not(input:last-child) {
+    margin-bottom: 20px;
+  }
+
+  .logup {
+    width: 100px;
+    align-self: stretch;
+    justify-self: flex-end;
+    cursor: pointer;
+  }
+
+  & > .reg {
+    position: absolute;
+    z-index: 100;
+    font-size: 20px;
+    opacity: 1;
+    top: 0;
+  }
+
+  label {
+    border: 2px solid orange;
+    padding: 2px 8px 2px 8px;
+    height: 30px;
+  }
+
+  .label {
+    @include flex(row, center, center);
+    position: absolute;
+    bottom: 0;
+
+    .file {
+      opacity: 0;
+      width: 0;
+    }
+
+    span {
+      cursor: pointer;
+      position: relative;
+    }
+  }
+
+  & .has_profile {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: 1px solid orchid;
+    padding: 4px;
+    cursor: pointer;
+  }
+}
+
+.first_row, .second_row {
+  width: 100%;
+  @include flex(column, center, center);
+}
+
+//Log in
+.auth_wrapper {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  backdrop-filter: blur(5px);
+
+  .authForm {
+    padding-top: 20px;
+    @include flex(column, center, center);
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 150px;
+    transform: translate(-50%, -50%);
+    border: 2px solid orange;
+
+    .fields {
+      @include flex(column, center, center);
+
+      & > input {
+        margin-bottom: 20px;
+      }
+    }
+
+    & .login_title {
+      position: absolute;
+      top: 4px;
+      font-size: 20px;
+    }
+  }
+}
