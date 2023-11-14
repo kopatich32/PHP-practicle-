@@ -11,14 +11,18 @@
 </head>
 <body>
 <?php
-//$db = new mysqli('localhost', 'root', '','shop');
-//$req = $db->query("SELECT * FROM `users`");
-//$data = $req->fetch_assoc();
+$db = new mysqli('localhost', 'root', '','shop');
+$req = $db->query("SELECT * FROM `users`");
+$data = $req->fetch_assoc();
     if(isset($_FILES['change_profile_avatar'])){
-print_r($_FILES['change_profile_avatar']['tmp_name']);
+        $localPath = 'photos/';
+        $fullPath = $localPath . basename($_FILES['change_profile_avatar']['name']);
+if(move_uploaded_file($_FILES['change_profile_avatar']['tmp_name'], $fullPath)){
+echo '<br>' . 'file was uploaded';
+}
     }
-
 ?>
+
 <a href="index.php">На главную</a>
 <form method="POST" enctype="multipart/form-data">
     <div class="user">

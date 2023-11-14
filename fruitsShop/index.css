@@ -59,24 +59,23 @@ header {
   display: grid;
   justify-items: center;
   grid-template-columns: repeat(3, 1fr); }
-
-.card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid red;
-  width: 200px;
-  padding-bottom: 20px;
-  margin-bottom: 20px; }
-  .card .picture {
-    padding: 10px;
-    width: 100%;
-    height: 150px; }
-    .card .picture img {
-      width: 90%; }
-  .card .cart {
-    margin-top: 20px; }
+  .card_wrapper .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid red;
+    width: 200px;
+    padding-bottom: 20px;
+    margin-bottom: 20px; }
+    .card_wrapper .card .addCart {
+      margin-top: 20px;}
+    .card_wrapper .card .picture {
+      padding: 10px;
+      width: 100%;
+      height: 150px; }
+      .card_wrapper .card .picture img {
+        width: 90%; }
 
 .reg_wrapper {
   display: none;

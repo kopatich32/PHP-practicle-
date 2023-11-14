@@ -15,7 +15,7 @@ if(isset($_POST['logup'])){
     $password = $_POST['password'];
     $file = $_FILES['file'];
     $role = 'user';
-    $path = 'photos/';
+    $path = '/photos/';
     $upload = $path . basename($_FILES['file']['name']);
     move_uploaded_file($_FILES['file']['tmp_name'], $upload);
     $row = $db->query("INSERT INTO `users`(`login`, `pass`, `email`, `name`, `photo`, `role`) VALUES ('$login','$password','$email','$name','$upload','$role')");
@@ -53,7 +53,7 @@ if(isset($_SESSION['auth']) == true){?>
         <button>exit</button>
     </a>
 <?php } ?>
-    <div class="cart">9</div>
+    <div class="cart"></div>
     <?php if(isset($_SESSION['auth']) == true) {?>
     <a href="UserProfile.php" class="user_card">
         <div class="avatar">
@@ -89,12 +89,10 @@ while($row = $req->fetch_assoc()){?>
             <input style="width: 30px;text-align: center" class="counter" data-counter value="0">
             <button class="rightArrow" data-action="plus">+</button>
         </div>
-        <button class="cart">Добавить в корзину</button>
+        <button class="addCart">Добавить в корзину</button>
     </div>
 <?php } ?>
 </div>
-
-
 <div class="reg_wrapper">
         <form class="registration" name="form" method="POST" enctype="multipart/form-data">
             <div class="first_row"><input type="text" placeholder="name" name="name">

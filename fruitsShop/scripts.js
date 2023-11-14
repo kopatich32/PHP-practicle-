@@ -31,7 +31,7 @@ let currentCard = event.target.parentElement;
 let thisCounter = currentCard.querySelector('[data-counter]');
         thisCounter.value = ++thisCounter.value;
         let res = currentCard.previousElementSibling.lastElementChild;
-        console.log(res.innerText);
+        console.log(res.innerText)
     }
     if(event.target.dataset.action === 'minus'){
         let currentCard = event.target.parentElement;
@@ -42,3 +42,29 @@ let thisCounter = currentCard.querySelector('[data-counter]');
         }
     }
 })
+
+// Add to cart
+let cart = $('.cart'); //result
+let btnAdd = document.querySelectorAll('.addCart');
+let counters = document.querySelectorAll('.counter');
+btnAdd.forEach(btn=>{
+    btn.addEventListener('click', event=>{
+        let target = event.target;
+        let thisarea = +target.previousElementSibling.lastElementChild.previousElementSibling.value;
+        cart.innerText = +cart.innerText + thisarea;
+    })
+})
+counters.forEach(area=>{
+    area.addEventListener('change', e=>{
+        let enteredValue = +e.target.value;
+        let baseValue = +e.target.parentElement.previousElementSibling.querySelector('span').innerText;
+        baseValue = baseValue - enteredValue;
+        console.log(baseValue)
+        let formData = new FormData();
+        fetch('index.php',{
+            method: 'POST',
+            body: baseValue
+        })
+    })
+})
+
