@@ -15,7 +15,7 @@
 //$req = $db->query("SELECT * FROM `users`");
 //$data = $req->fetch_assoc();
     if(isset($_FILES['change_profile_avatar'])){
-print_r($_FILES['change_profile_avatar']);
+print_r($_FILES['change_profile_avatar']['tmp_name']);
     }
 
 ?>

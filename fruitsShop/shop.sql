@@ -68,8 +68,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`, `email`, `name`, `photo`, `role`) VALUES
-(3, 'kopatich', '123', 'kopatich1994@yandex.ru', 'Михаил Погонялкин', 'files/1699960443Безымянный 1.png', 'admin'),
-(7, 'guest', '123', 'kopatich1994@yandex.ru', '123', 'files/1699960443Безымянный 1.png', 'user');
+(3, 'kopatich', '123', 'kopatich1994@yandex.ru', 'Михаил Погонялкин', 'photos/IMG_20231026_001815.jpg', 'admin'),
+(7, 'guest', '123', 'kopatich1994@yandex.ru', '123', 'photos/unname1.png', 'user');
 
 --
 -- Индексы сохранённых таблиц
