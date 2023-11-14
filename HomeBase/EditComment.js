@@ -44,14 +44,14 @@ editBtn.forEach(item => {
 
     item.addEventListener('click', event => {
 
-        // event.preventDefault();
-        let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.firstElementChild;
+        event.preventDefault();
+        let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.lastElementChild;
 
         if (item.contains(event.target)) {
             thisMessage.removeAttribute('contenteditable');
             thisMessage.setAttribute('contenteditable', "true");
             item.style.display = 'none';
-            item.nextElementSibling.firstElementChild.style.display = 'block';
+            item.parentElement.nextElementSibling.style.display = 'block';
 
             thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
             thisMessage.style.transition = '1s';

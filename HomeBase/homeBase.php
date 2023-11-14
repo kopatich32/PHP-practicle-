@@ -4,29 +4,12 @@ if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
 ////
-//    $text = @$_GET['message'];
-//    print_r(@$_POST['message']);
-
-//if (isset($_POST['message'])) {
-//    $edit_id = $_GET['refactor'];
-//    $text = @$_POST['message'];
-//    print_r(@$_POST['message']);
-//    print_r($edit_id);
-//    print_r($_GET['refactor']);
-//    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 410");
-//}
-
-if (isset($_GET['refactor'])) {
-    $edit_id = $_GET['refactor'];
-//    $text = @$_POST['message'];
-//    print_r(@$_POST['message']);
-//    print_r($edit_id);
-    print_r($_GET['refactor']);
-//    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = '$edit_id'");
+if (isset($_POST['save'])) {
+    $edit_id = @$_POST['val'];
+    $text = @$_POST['message'];
+    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = '$edit_id'");
+    print_r($edit_id);
 }
-
-
-
 
 //////
 if (isset($_POST['send'])) {
@@ -75,7 +58,6 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         ?>
 
         <div class="comment_of_user num_<?= $row3['id'] ?>">
-            <input name="val" value="<?= $row3['id'] ?>">
             <div class="comment_header">
                 <div class="avatar">
                     <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
@@ -83,17 +65,18 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 <div class="user_name">KotE</div>
                 <div class="time"><?= $row3['date'] ?></div>
             </div>
-            <form method="POST" name="showed_mess">
+            <form id="form" method="POST" name="showed_mess">
+                <input name="val" value="<?= $row3['id'] ?>">
                 <input class="entered_message" maxlength="100" name="message" contenteditable="false"
                        value="<?= $row3['message'] ?>">
             </form>
 
             <div class="edit_buttons">
-                <button class="editBtn" name="edit">Редактировать</button>
-
                 <a class="edit" href="?refactor=<?= $row3['id'] ?>">
-                    <button class="save" type="submit" name="save">Сохранить</button>
+                <button class="editBtn" name="edit">Редактировать</button>
                 </a>
+                    <button form="form" class="save" name="save">Сохранить</button>
+
 
                 <a class="delete">
                     <button name="admin_del_btn">Удалить</button>
