@@ -100,8 +100,9 @@ textarea{
   .edit_buttons {
     @include flex(row, flex-end, normal);
     margin-top: 5px;
-    button{
+    button, .editBtn{
       border: none;
+      height: 30px;
       box-shadow: 0 0 2px black;
       padding: 5px;
       background: none;
@@ -124,6 +125,7 @@ textarea{
     }
     a{
       text-decoration: none;
+      color: black;
     }
     .save{
       display: none;

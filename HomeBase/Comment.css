@@ -89,13 +89,14 @@ textarea {
     justify-content: flex-end;
     align-items: normal;
     margin-top: 5px; }
-    .comment_of_user .edit_buttons button {
+    .comment_of_user .edit_buttons button, .comment_of_user .edit_buttons .editBtn {
       border: none;
+      height: 30px;
       box-shadow: 0 0 2px black;
       padding: 5px;
       background: none;
       transition: .5s; }
-      .comment_of_user .edit_buttons button:hover {
+      .comment_of_user .edit_buttons button:hover, .comment_of_user .edit_buttons .editBtn:hover {
         cursor: pointer; }
     .comment_of_user .edit_buttons .editBtn, .comment_of_user .edit_buttons .save {
       margin-right: 10px; }
@@ -105,7 +106,8 @@ textarea {
     .comment_of_user .edit_buttons .delete:hover {
       background: rgba(180, 36, 36, 0.85); }
     .comment_of_user .edit_buttons a {
-      text-decoration: none; }
+      text-decoration: none;
+      color: black; }
     .comment_of_user .edit_buttons .save {
       display: none; }
 

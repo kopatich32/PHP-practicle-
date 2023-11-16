@@ -4,13 +4,16 @@ if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
 ////
-if (isset($_POST['save'])) {
-    echo 'lal';
+if (isset($_POST['message']) && !empty($_POST['val'])) {
+    echo 'bugaga';
     $edit_id = @$_POST['val'];
     $text = @$_POST['message'];
-    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 423");
+    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = '$edit_id'");
     print_r($edit_id);
 }
+//if($_GET['refactor']){
+//    print_r($_GET['refactor']);
+//}
 
 //////
 if (isset($_POST['send'])) {
@@ -74,7 +77,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 
             <div class="edit_buttons">
                 <a class="edit" href="?refactor=<?= $row3['id'] ?>">
-                <button class="editBtn" name="edit">Редактировать</button>
+                <div class="editBtn" name="edit">Редактировать</div>
                 </a>
                     <button form="form" class="save" name="save">Сохранить</button>
 

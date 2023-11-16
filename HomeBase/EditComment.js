@@ -45,6 +45,7 @@ editBtn.forEach(item => {
     item.addEventListener('click', event => {
 
         event.preventDefault();
+
         let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.lastElementChild;
 
         if (item.contains(event.target)) {
@@ -67,14 +68,12 @@ editBtn.forEach(item => {
 
 saveBtn.forEach(item=>{
     item.onclick = e=>{
-        // e.preventDefault()
+        // e.preventDefault();
         item.style.display = 'none';
         item.parentElement.querySelector('.editBtn').style.display = 'block';
         e.stopPropagation()
         let form = document.forms.showed_mess;
         let formData = new FormData(form);
-       // let text = document.querySelector('.entered_message').value;
-       // formData.set('mess', 'ololo');
         fetch('/HomeBase/homeBase.php', {
             method: "POST",
             body: formData
