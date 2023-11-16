@@ -108,8 +108,6 @@ textarea {
     .comment_of_user .edit_buttons a {
       text-decoration: none;
       color: black; }
-    .comment_of_user .edit_buttons .save {
-      display: none; }
 
 .confirm_delete_message {
   visibility: hidden;

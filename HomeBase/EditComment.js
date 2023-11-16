@@ -44,15 +44,15 @@ editBtn.forEach(item => {
 
     item.addEventListener('click', event => {
 
-        event.preventDefault();
+        // event.preventDefault();
 
         let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.lastElementChild;
 
         if (item.contains(event.target)) {
             thisMessage.removeAttribute('contenteditable');
             thisMessage.setAttribute('contenteditable', "true");
-            item.style.display = 'none';
-            item.parentElement.nextElementSibling.style.display = 'block';
+            // item.style.display = 'none';
+            // item.parentElement.nextElementSibling.style.display = 'block';
 
             thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
             thisMessage.style.transition = '1s';
@@ -69,8 +69,8 @@ editBtn.forEach(item => {
 saveBtn.forEach(item=>{
     item.onclick = e=>{
         // e.preventDefault();
-        item.style.display = 'none';
-        item.parentElement.querySelector('.editBtn').style.display = 'block';
+        // item.style.display = 'none';
+        // item.parentElement.querySelector('.editBtn').style.display = 'block';
         e.stopPropagation()
         let form = document.forms.showed_mess;
         let formData = new FormData(form);

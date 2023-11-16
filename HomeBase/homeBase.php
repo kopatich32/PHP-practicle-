@@ -4,16 +4,13 @@ if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
 ////
-if (isset($_POST['message']) && !empty($_POST['val'])) {
-    echo 'bugaga';
+if (isset($_POST['save'])) {
     $edit_id = @$_POST['val'];
     $text = @$_POST['message'];
     $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = '$edit_id'");
     print_r($edit_id);
 }
-//if($_GET['refactor']){
-//    print_r($_GET['refactor']);
-//}
+
 
 //////
 if (isset($_POST['send'])) {
@@ -40,6 +37,20 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     <link rel="stylesheet" href="Comment.css">
 </head>
 <body>
+<?php
+
+if(isset($_GET['refactor'])){
+    $flag = true;
+    $id = $_GET['refactor'];
+    $req = $db->query("SELECT * FROM `message` WHERE `id` = '$id'");
+    $then = $req->fetch_assoc();
+    $comment = @$then['message'];
+    echo $comment;
+}
+if(isset($_POST['save'])){
+    $flag = false;
+}
+?>
 <div class="container">
     <div class="comment_wrapper">
         <div class="left_symbols">
@@ -56,6 +67,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             </div>
         </form>
     </div>
+
     <?php
 
     while ($row3 = $out->fetch_assoc()) {
@@ -72,18 +84,27 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             <form id="form" method="POST" name="showed_mess">
                 <input name="val" value="<?= $row3['id'] ?>">
                 <input class="entered_message" maxlength="100" name="message" contenteditable="false"
-                       value="<?= $row3['message'] ?>">
+                       value="<?php
+                       if($_GET['refactor']){
+                           echo $comment;
+                       }else{
+                           echo $row3['message'];
+                       }?>">
             </form>
 
             <div class="edit_buttons">
-                <a class="edit" href="?refactor=<?= $row3['id'] ?>">
-                <div class="editBtn" name="edit">Редактировать</div>
-                </a>
-                    <button form="form" class="save" name="save">Сохранить</button>
 
+
+                <?php if(@$flag === true){ ?>
+                    <button form="form" class="save" name="save">Сохранить</button>
+<?php }else{ ?>
+                    <a class="edit" href="?refactor=<?= $row3['id'] ?>">
+                        <div class="editBtn" name="edit">Редактировать</div>
+                    </a>
+                <?php }?>
 
                 <a class="delete">
-                    <button name="admin_del_btn">Удалить</button>
+                    <button  name="admin_del_btn">Удалить</button>
                 </a>
             </div>
 
@@ -93,7 +114,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             <div class="choose">
 
                 <a href="?del=<?= $row3['id'] ?>">
-                    <button class="yes" name="yes" type="submit">Да</button>
+                    <button   class="yes" name="yes" type="submit">Да</button>
                 </a>
                 <button class="no">Нет</button>
             </div>
