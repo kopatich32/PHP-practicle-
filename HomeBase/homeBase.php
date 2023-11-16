@@ -1,6 +1,6 @@
 <?php
 
-var_dump($_POST);
+//var_dump($_POST);
 $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
@@ -30,13 +30,15 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 
 
 
+ //Рабочий
 
-if($_POST['del'])
-{
-    $id = $_POST['val'];
-    $db->query("DELETE FROM `message` WHERE `id`='$id'");
-    header('Location: /HomeBase/homeBase.php');
-}
+
+//if($_POST['del'])
+//{
+//    $id = $_POST['val'];
+//    $db->query("DELETE FROM `message` WHERE `id`='$id'");
+//    header('Location: /HomeBase/homeBase.php');
+//}
 ?>
 <!doctype html>
 <html lang="en">
@@ -93,32 +95,45 @@ if(isset($_POST['save'])){
                 <div class="user_name">KotE</div>
                 <div class="time"><?= $row3['date'] ?></div>
             </div>
+            <?php
+            if($_POST['del']) {
+
+                var_dump($_POST['yess']);
+               $id = $_POST['val'];
+               echo $id;
+                $db->query("DELETE FROM `message` WHERE `id`='$id'");
+                header('Location: /HomeBase/homeBase.php');
+            }
+            ?>
             <form id="form" method="POST" name="showed_mess">
                 <input name="val" value="<?= $row3['id'] ?>">
-                <input class="entered_message" maxlength="100" name="message" contenteditable="false">
+                <input class="entered_message" maxlength="100" name="message" contenteditable="false" value="<?= $row3['message'] ?>">
 
                 <br><input type="submit" name="ref" value="ред">
-                <input type="submit" name="del" value="дел">
-            </form>
+<!--                <input type="submit" name="del" value="дел">-->
+                <input  class="yes" name="lalala" type="submit" value="Да">
 
-<!---->
-<!--            <div class="edit_buttons">-->
-<!--                    <button form="form" class="save" name="save">Сохранить</button>-->
-<!--                    <a class="edit" href="?refactor=--><?php //= $row3['id'] ?><!--">-->
-<!--                        <div class="editBtn" name="edit">Редактировать</div>-->
-<!--                    </a>-->
-<!--                    <div class="delete" name="admin_del_btn">Удалить</div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!---->
-<!--        <div class="confirm_delete_message">-->
-<!--            <p>Удалить?</p>-->
-<!--            <div class="choose">-->
-<!--                <a href="?del=--><?php //= $row3['id']?><!--">-->
-<!--                    <button   class="yes" name="yes" type="submit">Да</button>-->
-<!--                </a>-->
-<!--                <button class="no">Нет</button>-->
-<!--            </div>-->
+            </form>
+            <div class="edit_buttons">
+                    <button form="form" class="save" name="save">Сохранить</button>
+                    <a class="edit" href="?refactor=<?= $row3['id'] ?>">
+                        <div class="editBtn" name="edit">Редактировать</div>
+                    </a>
+                    <div class="delete" name="admin_del_btn">Удалить</div>
+            </div>
+        </div>
+
+        <div class="confirm_delete_message">
+            <p>Удалить?</p>
+            <div class="choose">
+
+
+<!--                <input form="form" class="yes" name="lalala" type= "submit" value="Да">-->
+                                <input form="form" type="submit" name="del" value="дел">
+
+
+                <button class="no">Нет</button>
+            </div>
         </div>
     <?php } ?>
 </div>
