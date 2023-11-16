@@ -1,4 +1,4 @@
-
+let $ = document.querySelector.bind(document);
 let editBtn = document.querySelectorAll('.editBtn');
 let deleteBtn = document.querySelectorAll('.delete');
 let confirmWindow = document.querySelector('.confirm_delete_message');
@@ -13,18 +13,13 @@ tag.forEach(elem=>{
     obj.push({elem: elem.innerText})
 })
 // console.log(obj)
-
+$('#message').focus();
 deleteBtn.forEach(item => {
 
     item.addEventListener('click', event => {
-        event.preventDefault();
         if (item.contains(event.target)) {
             confirmWindow.style.visibility = 'visible';
         }
-        // if(!item.contains(event.target)){
-        //     confirmWindow.style.visibility = 'hidden';
-        // }
-
         let questionBlock = item.getBoundingClientRect();
         let questionBlockHeight = confirmWindow.offsetHeight;
         confirmWindow.style.top = questionBlock.top - questionBlockHeight - 20 + window.pageYOffset + 'px';
@@ -44,15 +39,15 @@ editBtn.forEach(item => {
 
     item.addEventListener('click', event => {
 
-        // event.preventDefault();
+        event.preventDefault();
 
         let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.lastElementChild;
 
         if (item.contains(event.target)) {
             thisMessage.removeAttribute('contenteditable');
             thisMessage.setAttribute('contenteditable', "true");
-            // item.style.display = 'none';
-            // item.parentElement.nextElementSibling.style.display = 'block';
+            item.style.display = 'none';
+            item.parentElement.previousElementSibling.style.display = 'block';
 
             thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
             thisMessage.style.transition = '1s';
@@ -69,8 +64,8 @@ editBtn.forEach(item => {
 saveBtn.forEach(item=>{
     item.onclick = e=>{
         // e.preventDefault();
-        // item.style.display = 'none';
-        // item.parentElement.querySelector('.editBtn').style.display = 'block';
+        item.style.display = 'none';
+        item.parentElement.querySelector('.editBtn').style.display = 'block';
         e.stopPropagation()
         let form = document.forms.showed_mess;
         let formData = new FormData(form);
