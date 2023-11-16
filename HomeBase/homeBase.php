@@ -5,9 +5,10 @@ if ($db->connect_errno):
 endif;
 ////
 if (isset($_POST['save'])) {
+    echo 'lal';
     $edit_id = @$_POST['val'];
     $text = @$_POST['message'];
-    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = '$edit_id'");
+    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 423");
     print_r($edit_id);
 }
 

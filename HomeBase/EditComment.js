@@ -69,7 +69,7 @@ saveBtn.forEach(item=>{
     item.onclick = e=>{
         // e.preventDefault()
         item.style.display = 'none';
-        item.parentElement.previousElementSibling.style.display = 'block';
+        item.parentElement.querySelector('.editBtn').style.display = 'block';
         e.stopPropagation()
         let form = document.forms.showed_mess;
         let formData = new FormData(form);
@@ -79,7 +79,8 @@ saveBtn.forEach(item=>{
             method: "POST",
             body: formData
         })
-            .then(response => console.log(response.json()))
+            .then(response => response.json())
+            .then(data =>console.log(data))
     }
 
 })

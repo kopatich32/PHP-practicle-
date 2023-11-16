@@ -1,6 +1,8 @@
 <?php
 session_start();
+
 require('connect.php');
+include('updateValue.php');
 function show($arr){
     echo '<pre>';
     print_r($arr);
@@ -43,7 +45,7 @@ if($for_profile->num_rows > 0){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
@@ -54,6 +56,7 @@ if(isset($_SESSION['auth']) == true){?>
     </a>
 <?php } ?>
     <div class="cart"></div>
+    <div class="buy">Купить</div>
     <?php if(isset($_SESSION['auth']) == true) {?>
     <a href="UserProfile.php" class="user_card">
         <div class="avatar">
@@ -86,7 +89,7 @@ while($row = $req->fetch_assoc()){?>
         <p class="amount">Остаток: <span class="db_amount"><?= $row['amount']?></span></p>
         <div class="counter_cart">
             <button class="leftArrow" data-action="minus">-</button>
-            <input style="width: 30px;text-align: center" class="counter" data-counter value="0">
+            <input style="width: 30px;text-align: center" class="counter" data-counter value="0" name="amount">
             <button class="rightArrow" data-action="plus">+</button>
         </div>
         <button class="addCart">Добавить в корзину</button>
@@ -123,5 +126,7 @@ while($row = $req->fetch_assoc()){?>
 </form>
 </div>
 <script src="scripts.js"></script>
+
+
 </body>
 </html>

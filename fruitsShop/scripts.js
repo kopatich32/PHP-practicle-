@@ -24,7 +24,6 @@ $('.file').onchange = ()=>{
     path.innerText = res;
 }
 //Cart counter
-let counter = $('.counter');
 window.addEventListener('click',function (event){
     if(event.target.dataset.action === 'plus'){
 let currentCard = event.target.parentElement;
@@ -60,11 +59,17 @@ counters.forEach(area=>{
         let baseValue = +e.target.parentElement.previousElementSibling.querySelector('span').innerText;
         baseValue = baseValue - enteredValue;
         console.log(baseValue)
-        let formData = new FormData();
-        fetch('index.php',{
+
+        console.log(JSON.stringify(baseValue))
+        fetch('updateValue.php/',{
             method: 'POST',
-            body: baseValue
+            body: JSON.stringify({value:baseValue})
         })
+            .then(response => response.text())
+            .then(data =>console.log(data))
     })
 })
 
+// $('.buy').addEventListener('click',()=>{
+//     console.log(baseValue)
+// })

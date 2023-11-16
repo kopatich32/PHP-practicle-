@@ -21,7 +21,11 @@ header {
   header .cart {
     border: 2px solid orangered;
     width: 50px;
+    height: 20px;
     text-align: center; }
+  header .buy {
+    border: 1px solid black;
+    cursor: pointer; }
   header a {
     text-decoration: none;
     cursor: pointer;
@@ -69,7 +73,7 @@ header {
     padding-bottom: 20px;
     margin-bottom: 20px; }
     .card_wrapper .card .addCart {
-      margin-top: 20px;}
+      margin-top: 20px; }
     .card_wrapper .card .picture {
       padding: 10px;
       width: 100%;
@@ -173,4 +177,4 @@ header {
       top: 4px;
       font-size: 20px; }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=style.css.map */

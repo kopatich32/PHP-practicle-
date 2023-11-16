@@ -20,7 +20,8 @@ header {
   height: 80px; }
   header .cart {
     border: 2px solid orangered;
-    width: 50px;
+    width: 150px;
+    height: 20px;
     text-align: center; }
   header a {
     text-decoration: none;

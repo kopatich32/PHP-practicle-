@@ -25,9 +25,13 @@ header {
   .cart {
     border: 2px solid orangered;
     width: 50px;
+    height: 20px;
     text-align: center;
   }
-
+.buy{
+  border: 1px solid black;
+  cursor: pointer;
+}
   a {
     text-decoration: none;
     cursor: pointer;
