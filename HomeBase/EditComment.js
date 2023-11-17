@@ -38,16 +38,13 @@ deleteBtn.forEach(item => {
 editBtn.forEach(item => {
 
     item.addEventListener('click', event => {
-
-        event.preventDefault();
-
-        let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.lastElementChild;
+        let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.querySelector('.entered_message');
 
         if (item.contains(event.target)) {
             thisMessage.removeAttribute('contenteditable');
             thisMessage.setAttribute('contenteditable', "true");
             item.style.display = 'none';
-            item.parentElement.previousElementSibling.style.display = 'block';
+            item.previousElementSibling.firstElementChild.style.display = 'block';
 
             thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
             thisMessage.style.transition = '1s';
