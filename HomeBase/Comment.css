@@ -89,14 +89,14 @@ textarea {
     justify-content: flex-end;
     align-items: normal;
     margin-top: 5px; }
-    .comment_of_user .edit_buttons button, .comment_of_user .edit_buttons .editBtn, .comment_of_user .edit_buttons .delete {
+    .comment_of_user .edit_buttons button, .comment_of_user .edit_buttons .editBtn, .comment_of_user .edit_buttons .delete, .comment_of_user .edit_buttons input {
       border: none;
       height: 30px;
       box-shadow: 0 0 2px black;
       padding: 5px;
       background: none;
       transition: .5s; }
-      .comment_of_user .edit_buttons button:hover, .comment_of_user .edit_buttons .editBtn:hover, .comment_of_user .edit_buttons .delete:hover {
+      .comment_of_user .edit_buttons button:hover, .comment_of_user .edit_buttons .editBtn:hover, .comment_of_user .edit_buttons .delete:hover, .comment_of_user .edit_buttons input:hover {
         cursor: pointer; }
     .comment_of_user .edit_buttons .editBtn, .comment_of_user .edit_buttons .save {
       margin-right: 10px; }

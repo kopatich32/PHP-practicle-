@@ -30,7 +30,7 @@ header {
     text-decoration: none;
     cursor: pointer;
     color: black; }
-  header .exit, header .profile {
+   header .profile {
     display: flex;
     flex-direction: row;
     justify-content: center;

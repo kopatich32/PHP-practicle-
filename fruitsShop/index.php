@@ -28,14 +28,13 @@ $authLog = @$_POST['AuthLogin'];
 $authPass = @$_POST['AuthPassword'];
 $for_profile = $db->query("SELECT * FROM `users` WHERE `login` = '$authLog' AND `pass` = '$authPass'");
 if($for_profile->num_rows > 0){
-    $row = $for_profile->fetch_assoc();
+    $row1 = $for_profile->fetch_assoc();
     $_SESSION['auth'] = true;
-    $_SESSION['avatar'] = $row['photo'];
-    $_SESSION['login'] = $row['login'];
-    $_SESSION['role'] =$row['role'];
+    $_SESSION['avatar'] = $row1['photo'];
+    $_SESSION['login'] = $row1['login'];
+    $_SESSION['role'] =$row1['role'];
 }
 
-//
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,6 +49,11 @@ if($for_profile->num_rows > 0){
 <body>
 <header>
 <?php
+$login = @$_SESSION['login'];
+$req = $db->query("SELECT * FROM `users` WHERE `login` = '$login'");
+$data =$req->fetch_assoc();
+
+
 if(isset($_SESSION['auth']) == true){?>
     <a href="disconect.php" class="exit">
         <button>exit</button>
@@ -60,7 +64,7 @@ if(isset($_SESSION['auth']) == true){?>
     <?php if(isset($_SESSION['auth']) == true) {?>
     <a href="UserProfile.php" class="user_card">
         <div class="avatar">
-            <img src="<?=$_SESSION['avatar'] ?>">
+            <img src="<?=$data['photo'] ?>">
         </div>
         <div class="current_user">
             <span class="login"><?=$_SESSION['login'] ?></span>
@@ -83,7 +87,7 @@ while($row = $req->fetch_assoc()){?>
     <div class="card">
         <p><?= $row['name']?></p>
         <div class="picture">
-            <img src="<?= $row['photo'] ?>" alt=" <?= $row['name'] ?>">
+            <img src="<?= $row['photo'] ?>" alt="<?= $row['name'] ?>" title="<?= $row['name'] ?>">
         </div>
         <p class="cost">Цена: <?= $row['cost']?> р.</p>
         <p class="amount">Остаток: <span class="db_amount"><?= $row['amount']?></span></p>

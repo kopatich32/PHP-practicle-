@@ -62,12 +62,12 @@ saveBtn.forEach(item=>{
     item.onclick = e=>{
         // e.preventDefault();
         item.style.display = 'none';
-        item.parentElement.querySelector('.editBtn').style.display = 'block';
+        item.parentElement.nextElementSibling.style.display = 'block';
         e.stopPropagation()
         let form = document.forms.showed_mess;
         let formData = new FormData(form);
         fetch('/HomeBase/homeBase.php', {
-            method: "POST",
+            method: "GET",
             body: formData
         })
             .then(response => response.json())
