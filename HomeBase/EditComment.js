@@ -14,37 +14,16 @@ tag.forEach(elem=>{
 })
 // console.log(obj)
 $('#message').focus();
-deleteBtn.forEach(item => {
-
-    item.addEventListener('click', event => {
-        if (item.contains(event.target)) {
-            confirmWindow.style.visibility = 'visible';
-        }
-        let questionBlock = item.getBoundingClientRect();
-        let questionBlockHeight = confirmWindow.offsetHeight;
-        confirmWindow.style.top = questionBlock.top - questionBlockHeight - 20 + window.pageYOffset + 'px';
-        confirmWindow.style.left = questionBlock.left - item.clientWidth + 20 + window.pageXOffset + 'px';
-        event.stopPropagation();
-    })
-    document.addEventListener('click', e => {
-        if (!confirmWindow.contains(e.target)) {
-            confirmWindow.style.visibility = 'hidden';
-        }
-    })
-})
-
 
 //Edit message
 editBtn.forEach(item => {
-
     item.addEventListener('click', event => {
-        let thisMessage = event.target.closest('.edit_buttons').previousElementSibling.querySelector('.entered_message');
 
+        let thisMessage = event.target.closest('#forma').querySelector('.entered_message');
         if (item.contains(event.target)) {
-            thisMessage.removeAttribute('contenteditable');
-            thisMessage.setAttribute('contenteditable', "true");
+            thisMessage.removeAttribute('readonly');
             item.style.display = 'none';
-            item.previousElementSibling.firstElementChild.style.display = 'block';
+            item.previousElementSibling.style.display = 'block';
 
             thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
             thisMessage.style.transition = '1s';
@@ -57,7 +36,6 @@ editBtn.forEach(item => {
         }
     })
 })
-
 saveBtn.forEach(item=>{
     item.onclick = e=>{
         // e.preventDefault();
@@ -75,10 +53,3 @@ saveBtn.forEach(item=>{
     }
 
 })
-no.addEventListener('click', () => {
-    confirmWindow.style.visibility = 'hidden';
-})
-
-
-
-

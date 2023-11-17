@@ -11,7 +11,7 @@ body {
   width: 100%;
   height: 100vh; }
   body .container {
-    width: 88%; }
+    width: 90%; }
 
 .comment_wrapper {
   margin-top: 100px;
@@ -24,10 +24,11 @@ body {
   .comment_wrapper form {
     width: 100%; }
 
-textarea {
+#message {
   max-width: 100%;
   min-width: 100%;
-  min-height: 50px; }
+  min-height: 50px;
+  resize: none; }
 
 .left_symbols {
   display: flex;
@@ -62,7 +63,7 @@ textarea {
   margin-top: 20px;
   border: 1px solid black;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   min-height: 60px;
   width: 100%; }
   .comment_of_user .comment_header {
@@ -78,11 +79,15 @@ textarea {
       font-size: 20px; }
     .comment_of_user .comment_header .time {
       opacity: .6; }
-  .comment_of_user .entered_message {
-    margin: -30px 0 0 70px;
-    width: 88%;
-    height: 60px;
-    word-break: break-all; }
+  .comment_of_user #forma {
+    width: 100%; }
+    .comment_of_user #forma .entered_message {
+      width: calc(100% - 70px);
+      margin: -30px 0 0 70px;
+      resize: none;
+      min-height: 3em;
+      color: black;
+      border: none; }
   .comment_of_user .edit_buttons {
     display: flex;
     flex-direction: row;

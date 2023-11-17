@@ -5,38 +5,27 @@ $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
-////
-//if (isset($_POST['save'])) {
-//    $edit_id = @$_POST['val'];
-//    $text = @$_POST['message'];
-//    $row = $db->query("UPDATE `message` SET `user`='KotE',`message`= '$text' WHERE `id` = '$edit_id'");
-//    print_r($edit_id);
-//}
-
-
-//////
 if (isset($_POST['send'])) {
     $time_of_message = date('d-m-Y H:i:s');
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('KotE','$text_of_message','$time_of_message')");
 }
-
-//if (isset($_GET['del'])) {
-//    $current_id = $_GET['del'];
-//    $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
-//}
-
-
-//Рабочий
-
-
-//if($_POST['del'])
-//{
-//    $id = $_POST['val'];
-//    $db->query("DELETE FROM `message` WHERE `id`='$id'");
-//    header('Location: /HomeBase/homeBase.php');
-//}
-?>
+if (isset($_GET['save'])) {
+    $id = $_GET['delete_id'];
+    $new_text = $_GET['message'];
+    $req = $db->query("UPDATE `message` SET `user`='KotE',`message`= '$new_text' WHERE `id` = '$id'");
+    echo $id . '<br>';
+    echo $new_text;
+    header('Location: /HomeBase/homeBase.php');
+    exit();
+}
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete_id'];
+    $db->query("DELETE FROM `message` WHERE `id`='$id'");
+    header('Location: /HomeBase/homeBase.php');
+    exit();
+}
+$out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,50 +37,23 @@ if (isset($_POST['send'])) {
     <link rel="stylesheet" href="Comment.css">
 </head>
 <body>
-<?php
-if(isset($_GET['refactor'])){
-$this_id = $_GET['refactor'];
-$edited_text = $_GET['message'];
-echo $this_id;
-echo '<br>' . $edited_text;
-    $req = $db->query("UPDATE `message` SET `user`='KotE',`message`= '9999999999999' WHERE `id` = '$this_id'");
-
-}
-
-if (isset($_GET['ed'])) {
-    $id = $_GET['val'];
-    $text = $_GET['message'];
-    $req = $db->query("UPDATE `message` SET `user`='KotE',`message`= '$text' WHERE `id` = '$id'");
-//    $then = $req->fetch_assoc();
-//    $comment = @$then['message'];
-    echo $id . '<br>';
-    echo $text;
-}
-?>
 <div class="container">
     <div class="comment_wrapper">
         <div class="left_symbols">
             <div class="symbols">Осталось символов</div>
             <div class="counter"></div>
         </div>
-        <?php
-        if (isset($_GET['del'])) {
-            $id = $_GET['val'];
-            echo $id;
-            $db->query("DELETE FROM `message` WHERE `id`='$id'");
-        }
-        $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC?>
+
         <form method="POST" name="commentArea">
             <textarea id="message" placeholder="Комментарий" maxlength="100" name="comment"></textarea>
             <div class="buttons">
                 <button class="close" name="close">Закрыть</button>
                 <button class="send" type="submit" name="send">Отправить</button>
-                <div id="out"></div>
             </div>
         </form>
     </div>
     <?php
-    while ($row3 = $out->fetch_assoc()) { ?>
+    while ($row3 = $out->fetch_assoc()): ?>
         <div class="comment_of_user num_<?= $row3['id'] ?>">
             <div class="comment_header">
                 <div class="avatar">
@@ -100,39 +62,19 @@ if (isset($_GET['ed'])) {
                 <div class="user_name">KotE</div>
                 <div class="time"><?= $row3['date'] ?></div>
             </div>
-
             <form id="forma" method="get" name="showed_mess">
-                <input name="val" value="<?= $row3['id'] ?>">
-                <input class="entered_message" maxlength="100" name="message" contenteditable="false"
-                       value="<?= $row3['message'] ?>">
-
-                <input type="submit" name="del" value="дел">
-                <input type="submit" name="ed" value="edit">
-
-            </form>
-
+                <input name="delete_id" value="<?= $row3['id']?>" hidden>
+                <textarea class="entered_message" maxlength="100"  name="message" readonly><?= $row3['message'] ?></textarea>
             <div class="edit_buttons">
-                <a class="edit" href="?refactor=<?= $row3['id'] ?>">
-                    <input  type="submit" class="save" name="save" value="Сохранить">
-                </a>
-                <button class="editBtn">Редактировать</button>
-                <div class="delete">Удалить</div>
+                <input  type="submit" class="save" name="save" value="Сохранить">
+                <div class="editBtn">Редактировать</div>
+                <input class="delete" type="submit" value="Удалить" name="delete">
             </div>
+            </form>
         </div>
+    <?php endwhile; ?>
 
-        <div class="confirm_delete_message">
-            <p>Удалить?</p>
-            <div class="choose">
-
-                <input form="forma" type="submit" name="del" value="да">
-
-
-                <button class="no">Нет</button>
-            </div>
-        </div>
-    <?php } ?>
 </div>
-
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
 </body>
