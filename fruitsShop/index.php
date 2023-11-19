@@ -59,7 +59,7 @@ if(isset($_SESSION['auth']) == true){?>
         <button>exit</button>
     </a>
 <?php } ?>
-    <div class="cart"></div>
+    <div class="cart" title="Корзина"></div>
     <div class="buy">Купить</div>
     <?php if(isset($_SESSION['auth']) == true) {?>
     <a href="UserProfile.php" class="user_card">
