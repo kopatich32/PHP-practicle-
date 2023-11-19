@@ -20,7 +20,7 @@
         btn.addEventListener("click", () => {
             let form = document.getElementById("TextForm");
             let formData = new FormData(form);
-            fetch('/Update.php', {
+            fetch('Update.php', {
                 method: "POST",
                 body: formData
             })

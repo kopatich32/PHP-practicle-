@@ -1,28 +1,28 @@
 <?php
 
-//var_dump($_POST);
 $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
-if (isset($_POST['send'])) {
+
+if (isset($_POST['send']) && !empty($_POST['comment'])) {
     $time_of_message = date('d-m-Y H:i:s');
     $text_of_message = $_POST['comment'];
     $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('KotE','$text_of_message','$time_of_message')");
-}
-if (isset($_GET['save'])) {
-    $id = $_GET['delete_id'];
-    $new_text = $_GET['message'];
-    $req = $db->query("UPDATE `message` SET `user`='KotE',`message`= '$new_text' WHERE `id` = '$id'");
-    echo $id . '<br>';
-    echo $new_text;
-    header('Location: /HomeBase/homeBase.php');
+    header('Location: homeBase.php');
     exit();
 }
-if (isset($_GET['delete'])) {
-    $id = $_GET['delete_id'];
+
+if (isset($_POST['message'])) {
+    $id = $_POST['delete_id'];
+    $new_text = $_POST['message'];
+    $req = $db->query("UPDATE `message` SET `user`='KotE',`message`= '$new_text' WHERE `id` = '$id'");
+
+}
+if (isset($_POST['delete'])) {
+    $id = $_POST['delete_id'];
     $db->query("DELETE FROM `message` WHERE `id`='$id'");
-    header('Location: /HomeBase/homeBase.php');
+    header('Location: homeBase.php');
     exit();
 }
 $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC?>
@@ -53,7 +53,8 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC?>
         </form>
     </div>
     <?php
-    while ($row3 = $out->fetch_assoc()): ?>
+    while ($row3 = $out->fetch_assoc()):?>
+
         <div class="comment_of_user num_<?= $row3['id'] ?>">
             <div class="comment_header">
                 <div class="avatar">
@@ -62,18 +63,26 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC?>
                 <div class="user_name">KotE</div>
                 <div class="time"><?= $row3['date'] ?></div>
             </div>
-            <form id="forma" method="get" name="showed_mess">
+            <form id="forma" method="post" name="showed_mess">
                 <input name="delete_id" value="<?= $row3['id']?>" hidden>
                 <textarea class="entered_message" maxlength="100"  name="message" readonly><?= $row3['message'] ?></textarea>
             <div class="edit_buttons">
                 <input  type="submit" class="save" name="save" value="Сохранить">
                 <div class="editBtn">Редактировать</div>
+<!--                <div class="delete">Удалить</div>-->
                 <input class="delete" type="submit" value="Удалить" name="delete">
             </div>
             </form>
         </div>
     <?php endwhile; ?>
-
+<!--    <div class="confirm_delete_message">-->
+<!--        <p>Удалить?</p>-->
+<!--        <div class="choose">-->
+<!---->
+<!--                <input form="forma" class="yes" name="yes" type="submit" value="Да">-->
+<!--            <button class="no">Нет</button>-->
+<!--        </div>-->
+<!--    </div>-->
 </div>
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
