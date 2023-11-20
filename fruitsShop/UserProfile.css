@@ -183,13 +183,19 @@ body {
   justify-content: center;
   align-items: center; }
 
+form[name="profile"] {
+  align-self: flex-start; }
+
 .user {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   border: 2px solid orange;
-  padding: 10px; }
+  padding: 10px;
+  width: 200px; }
+  .user label {
+    font-size: 16px; }
   .user h1[contenteditable="true"] {
     background: rgba(34, 144, 59, 0.63);
     padding: 10px; }
@@ -201,5 +207,30 @@ body {
       height: 100%; }
   .user button {
     margin: 20px 0; }
+
+.addGoods {
+  margin-top: 50px;
+  border: 2px solid goldenrod;
+  padding: 10px;
+  height: 400px; }
+  .addGoods form[name="add"] {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; }
+    .addGoods form[name="add"] .photo {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      width: 100%;
+      height: 150px;
+      border: 1px solid orangered; }
+      .addGoods form[name="add"] .photo input {
+        margin-bottom: 20px; }
+      .addGoods form[name="add"] .photo img {
+        width: 200px;
+        height: 100%; }
 
 /*# sourceMappingURL=UserProfile.css.map */
