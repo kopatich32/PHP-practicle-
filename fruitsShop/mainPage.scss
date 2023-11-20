@@ -27,11 +27,12 @@ header {
     width: 50px;
     height: 20px;
     text-align: center;
+
   }
-.buy{
-  border: 1px solid black;
-  cursor: pointer;
-}
+  .buy{
+    border: 1px solid black;
+    cursor: pointer;
+  }
   a {
     text-decoration: none;
     cursor: pointer;
@@ -75,10 +76,18 @@ header {
 
   .card {
     @include flex(column, center, center);
+    position: relative;
     border: 2px solid red;
     width: 200px;
     padding-bottom: 20px;
     margin-bottom: 20px;
+    .delCard{
+      border: 2px solid red;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px;
+    }
     .addCart {
       margin-top: 20px;
     }
@@ -202,4 +211,7 @@ header {
       font-size: 20px;
     }
   }
+}
+body{
+  background: red;
 }

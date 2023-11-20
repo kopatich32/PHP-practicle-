@@ -68,10 +68,17 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     border: 2px solid red;
     width: 200px;
     padding-bottom: 20px;
     margin-bottom: 20px; }
+    .card_wrapper .card .delCard {
+      border: 2px solid red;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px; }
     .card_wrapper .card .addCart {
       margin-top: 20px; }
     .card_wrapper .card .picture {
@@ -176,6 +183,9 @@ header {
       position: absolute;
       top: 4px;
       font-size: 20px; }
+
+body {
+  background: red; }
 
 body {
   display: flex;

@@ -68,6 +68,7 @@ if(isset($_POST['sendGoods']) && $_FILES['photoOfGoods']){
     $sendGoods = $db->query("INSERT INTO `goods`( `name`, `cost`, `amount`, `photo`) VALUES ('$goods','$cost','$left','$Path')");
     var_dump($sendGoods);
 }
+if($_SESSION['role'] == 'admin'):
 ?>
 
 <div class="addGoods">
@@ -84,6 +85,7 @@ if(isset($_POST['sendGoods']) && $_FILES['photoOfGoods']){
         <input type="submit" value="Добавить в БД" name="sendGoods">
     </form>
 </div>
+<?php endif; ?>
 <script>
     let img = document.querySelector('.photoGood');
     img.onchange = ()=>{

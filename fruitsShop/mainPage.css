@@ -30,7 +30,7 @@ header {
     text-decoration: none;
     cursor: pointer;
     color: black; }
-   header .profile {
+  header .exit, header .profile {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -68,10 +68,17 @@ header {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
     border: 2px solid red;
     width: 200px;
     padding-bottom: 20px;
     margin-bottom: 20px; }
+    .card_wrapper .card .delCard {
+      border: 2px solid red;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px; }
     .card_wrapper .card .addCart {
       margin-top: 20px; }
     .card_wrapper .card .picture {
@@ -177,4 +184,4 @@ header {
       top: 4px;
       font-size: 20px; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=mainPage.css.map */

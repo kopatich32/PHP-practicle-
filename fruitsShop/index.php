@@ -44,7 +44,7 @@ if($for_profile->num_rows > 0){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="mainPage.css">
 </head>
 <body>
 <header>
@@ -64,7 +64,7 @@ if(isset($_SESSION['auth']) == true){?>
     <?php if(isset($_SESSION['auth']) == true) {?>
     <a href="UserProfile.php" class="user_card">
         <div class="avatar">
-            <img src="<?=$data['photo'] ?>">
+            <img src="<?=$data['photo'] ?>" alt="picture">
         </div>
         <div class="current_user">
             <span class="login"><?=$_SESSION['login'] ?></span>
@@ -85,6 +85,7 @@ if(isset($_SESSION['auth']) == true){?>
     $req = $db->query("SELECT * FROM `goods`");
 while($row = $req->fetch_assoc()){?>
     <div class="card">
+        <div class="delCard">X</div>
         <p><?= $row['name']?></p>
         <div class="picture">
             <img src="<?= $row['photo'] ?>" alt="<?= $row['name'] ?>" title="<?= $row['name'] ?>">
