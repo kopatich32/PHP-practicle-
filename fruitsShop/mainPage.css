@@ -78,7 +78,8 @@ header {
       position: absolute;
       top: 10px;
       right: 10px;
-      padding: 5px; }
+      padding: 5px;
+      cursor: pointer; }
     .card_wrapper .card .addCart {
       margin-top: 20px; }
     .card_wrapper .card .picture {

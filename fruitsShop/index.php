@@ -33,6 +33,8 @@ if($for_profile->num_rows > 0){
     $_SESSION['avatar'] = $row1['photo'];
     $_SESSION['login'] = $row1['login'];
     $_SESSION['role'] =$row1['role'];
+    header('Location: index.php');
+
 }
 
 ?>
@@ -49,6 +51,8 @@ if($for_profile->num_rows > 0){
 <body>
 <header>
 <?php
+$req1 = $db->query("SELECT * FROM `goods`");
+
 $login = @$_SESSION['login'];
 $req = $db->query("SELECT * FROM `users` WHERE `login` = '$login'");
 $data =$req->fetch_assoc();
@@ -79,13 +83,26 @@ if(isset($_SESSION['auth']) == true){?>
     </a> <?php }?>
 </header>
 
-
+<?php
+if(@$_GET['delete']):
+    $delID = $_GET['delete'];
+    $forDelPicture = $db->query("SELECT * FROM `goods` WHERE `id` = '$delID'");
+    if($result =$forDelPicture->fetch_assoc()):
+        $str = $result['photo'];
+        unlink($str);
+    endif;
+    $delReq = $db->query("DELETE FROM `goods` WHERE `id` = '$delID'");
+ header('Location: index.php');
+ exit();
+endif;
+?>
 <div class="card_wrapper">
     <?php
-    $req = $db->query("SELECT * FROM `goods`");
-while($row = $req->fetch_assoc()){?>
+while($row = $req1->fetch_assoc()){?>
     <div class="card">
-        <div class="delCard">X</div>
+        <?php if(@$_SESSION['role'] === 'admin'): ?><a href="?delete=<?=$row['id'] ?>">
+            <div class="delCard">X</div>
+        </a> <?php endif; ?>
         <p><?= $row['name']?></p>
         <div class="picture">
             <img src="<?= $row['photo'] ?>" alt="<?= $row['name'] ?>" title="<?= $row['name'] ?>">
