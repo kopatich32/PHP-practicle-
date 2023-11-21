@@ -33,7 +33,7 @@ if($for_profile->num_rows > 0){
     $_SESSION['avatar'] = $row1['photo'];
     $_SESSION['login'] = $row1['login'];
     $_SESSION['role'] =$row1['role'];
-    header('Location: index.php');
+    header('Location: noreload.php');
 
 }
 
@@ -92,7 +92,7 @@ if(@$_GET['delete']):
         unlink($str);
     endif;
     $delReq = $db->query("DELETE FROM `goods` WHERE `id` = '$delID'");
- header('Location: index.php');
+ header('Location: noreload.php');
  exit();
 endif;
 ?>
