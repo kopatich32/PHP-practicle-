@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Ноя 14 2023 г., 14:15
+-- Время создания: Ноя 21 2023 г., 09:05
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.0.22
 
@@ -33,7 +33,7 @@ CREATE TABLE `goods` (
   `cost` int NOT NULL,
   `amount` int NOT NULL,
   `photo` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `goods`
@@ -45,7 +45,8 @@ INSERT INTO `goods` (`id`, `name`, `cost`, `amount`, `photo`) VALUES
 (3, 'Бананы', 140, 270, 'goods/banana.jpg'),
 (4, 'мандарины', 180, 420, 'goods/mandarine.jpg'),
 (5, 'киви', 110, 250, 'goods/kiwi.jpeg'),
-(6, 'ананас', 300, 115, 'goods/pineapple.jpg');
+(6, 'ананас', 300, 115, 'goods/pineapple.jpg'),
+(28, 'Собака по-корейски', 1, 1, 'goods/sobaken.png');
 
 -- --------------------------------------------------------
 
@@ -68,8 +69,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `pass`, `email`, `name`, `photo`, `role`) VALUES
-(3, 'kopatich', '123', 'kopatich1994@yandex.ru', 'Михаил Погонялкин', 'photos/IMG_20231026_001815.jpg', 'admin'),
-(7, 'guest', '123', 'kopatich1994@yandex.ru', '123', 'photos/unname1.png', 'user');
+(3, 'kopatich', '123', 'kopatich1994@yandex.ru', 'Михаил Погонялкин', 'photos/Безымянный 1.png', 'admin'),
+(7, 'guest', '123', 'kopatich1994@yandex.ru', '123', 'photos/IMG_20231026_001815.jpg', 'user');
 
 --
 -- Индексы сохранённых таблиц
@@ -97,7 +98,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `goods`
 --
 ALTER TABLE `goods`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

@@ -134,7 +134,6 @@ while($row = $req1->fetch_assoc()){?>
                 </label>
                 <span id="path"></span>
             </div>
-
         </form>
 </div>
 <div class="auth_wrapper">
