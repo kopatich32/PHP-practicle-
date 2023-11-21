@@ -34,6 +34,8 @@
                 'email': email,
             }
         });
+        let inputs = document.querySelectorAll('.clear');
+        inputs.forEach(item=> item.value = null)
         let url = "http://php-practicle-/HomeBase/ExampleNoReload/script.php";
         fetch(url,{
             method: 'POST',
@@ -41,8 +43,7 @@
         })
             .then(resp => resp.json())
             .then(data => console.log(data))
-        let inputs = document.querySelectorAll('.clear');
-        inputs.forEach(item=> item.value = null)
+
     })
 </script>
 </body>
