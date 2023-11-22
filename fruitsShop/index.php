@@ -1,8 +1,7 @@
 <?php
 session_start();
-
+global $db;
 require('connect.php');
-include('updateValue.php');
 function show($arr){
     echo '<pre>';
     print_r($arr);
@@ -33,7 +32,7 @@ if($for_profile->num_rows > 0){
     $_SESSION['avatar'] = $row1['photo'];
     $_SESSION['login'] = $row1['login'];
     $_SESSION['role'] =$row1['role'];
-    header('Location: noreload.php');
+    header('Location: index.php');
 
 }
 
@@ -147,7 +146,5 @@ while($row = $req1->fetch_assoc()){?>
 </form>
 </div>
 <script src="scripts.js"></script>
-
-
 </body>
 </html>
