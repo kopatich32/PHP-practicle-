@@ -1,9 +1,9 @@
 <?php
 
 $db = @new mysqli('localhost', 'root', '', 'comment');
-if ($db->connect_errno):
+if ($db->connect_errno){
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
-endif;
+}
 
 if (isset($_POST['send']) && !empty($_POST['comment'])) {
     $time_of_message = date('d-m-Y H:i:s');

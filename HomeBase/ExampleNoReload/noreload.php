@@ -43,6 +43,7 @@
         })
             .then(resp => resp.json())
             .then(data => console.log(data))
+        console.log(obj)
 
     })
 </script>
