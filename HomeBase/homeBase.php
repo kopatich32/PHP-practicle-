@@ -59,19 +59,16 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             <div class="symbols">Осталось символов</div>
             <div class="counter"></div>
         </div>
-
-        <form method="POST" name="commentArea">
             <textarea id="message" placeholder="Комментарий" maxlength="100" name="comment"></textarea>
             <div class="buttons">
                 <button class="close" name="close">Закрыть</button>
                 <button class="send" type="submit" name="send">Отправить</button>
                 <div id="out"></div>
             </div>
-        </form>
     </div>
     <?php
 
-    while ($row3 = $out->fetch_assoc()) {
+    while ($row3 = $out->fetch_assoc()):
         ?>
 
         <div class="comment_of_user num_<?= $row3['id'] ?>">
@@ -83,24 +80,16 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 <div class="user_name">KotE</div>
                 <div class="time"><?= $row3['date'] ?></div>
             </div>
-            <form method="POST" name="showed_mess">
-                <input class="entered_message" maxlength="100" name="message" contenteditable="false"
-                       value="<?= $row3['message'] ?>">
-            </form>
-
+                <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
             <div class="edit_buttons">
                 <button class="editBtn" name="edit">Редактировать</button>
-
                 <a class="edit" href="?refactor=<?= $row3['id'] ?>">
                     <button class="save" type="submit" name="save">Сохранить</button>
                 </a>
-
-                <a class="delete">
-                    <button name="admin_del_btn">Удалить</button>
-                </a>
+                    <button class="delete" name="admin_del_btn">Удалить</button>
             </div>
-
         </div>
+    <?php endwhile; ?>
         <div class="confirm_delete_message">
             <p>Удалить?</p>
             <div class="choose">
@@ -111,7 +100,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 <button class="no">Нет</button>
             </div>
         </div>
-    <?php } ?>
+
 </div>
 
 <script src="CharsCounter.js"></script>

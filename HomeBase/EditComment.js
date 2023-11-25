@@ -14,16 +14,18 @@ tag.forEach(elem=>{
 })
 // console.log(obj)
 
-deleteBtn.forEach(item => {
 
-    item.addEventListener('click', event => {
-        event.preventDefault();
+    document.addEventListener('click', event => {
+        deleteBtn.forEach(item => {
+
+            event.preventDefault();
         if (item.contains(event.target)) {
             confirmWindow.style.visibility = 'visible';
+            console.log('la')
         }
-        // if(!item.contains(event.target)){
-        //     confirmWindow.style.visibility = 'hidden';
-        // }
+        else if(!confirmWindow.contains(event.target)){
+            confirmWindow.style.visibility = 'hidden';
+        }
 
         let questionBlock = item.getBoundingClientRect();
         let questionBlockHeight = confirmWindow.offsetHeight;
@@ -31,12 +33,13 @@ deleteBtn.forEach(item => {
         confirmWindow.style.left = questionBlock.left - item.clientWidth + 20 + window.pageXOffset + 'px';
         event.stopPropagation();
     })
-    document.addEventListener('click', e => {
-        if (!confirmWindow.contains(e.target)) {
-            confirmWindow.style.visibility = 'hidden';
-        }
     })
-})
+    // document.addEventListener('click', e => {
+    //     if (!confirmWindow.contains(e.target)) {
+    //         confirmWindow.style.visibility = 'hidden';
+    //     }
+    // })
+
 
 
 //Edit message
