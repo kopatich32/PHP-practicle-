@@ -1,45 +1,68 @@
-
 let editBtn = document.querySelectorAll('.editBtn');
 let deleteBtn = document.querySelectorAll('.delete');
-let confirmWindow = document.querySelector('.confirm_delete_message');
+let confirmWindow = document.querySelector('.confirm_wrapper');
 let no = document.querySelector('.no');
 let saveBtn = document.querySelectorAll('.save');
 
 
 // For JS -PHP
 let tag = document.querySelectorAll('.entered_message');
-let obj =[];
-tag.forEach(elem=>{
+let obj = [];
+tag.forEach(elem => {
     obj.push({elem: elem.innerText})
 })
 // console.log(obj)
 
 
-    document.addEventListener('click', event => {
-        deleteBtn.forEach(item => {
-
-            event.preventDefault();
-        if (item.contains(event.target)) {
-            confirmWindow.style.visibility = 'visible';
-            console.log('la')
-        }
-        else if(!confirmWindow.contains(event.target)){
-            confirmWindow.style.visibility = 'hidden';
-        }
-
-        let questionBlock = item.getBoundingClientRect();
-        let questionBlockHeight = confirmWindow.offsetHeight;
-        confirmWindow.style.top = questionBlock.top - questionBlockHeight - 20 + window.pageYOffset + 'px';
-        confirmWindow.style.left = questionBlock.left - item.clientWidth + 20 + window.pageXOffset + 'px';
-        event.stopPropagation();
+    deleteBtn.forEach(delBtn => {
+        delBtn.addEventListener('click',function(event){
+            if (delBtn.contains(event.target)) {
+                let thisCoords = delBtn.getBoundingClientRect();
+                console.log(thisCoords)
+                confirmWindow.classList.add("visible")
+                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset - 60 + 'px';
+                confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + 'px';
+                event.stopPropagation()
+            }
+        })
     })
-    })
-    // document.addEventListener('click', e => {
-    //     if (!confirmWindow.contains(e.target)) {
-    //         confirmWindow.style.visibility = 'hidden';
-    //     }
-    // })
+document.addEventListener('click', function(event){
+if (!confirmWindow.contains(event.target)) {
+        // confirmWindow.style.visibility = 'hidden';
+        confirmWindow.classList.remove('visible');
+        console.log('yes')
+    }
 
+})
+
+
+
+
+// document.addEventListener('click', event => {
+//     deleteBtn.forEach(item => {
+//
+//         event.preventDefault();
+//     if (item.contains(event.target)) {
+//         confirmWindow.style.visibility = 'visible';
+//         console.log('la')
+//     }
+//     else if(!confirmWindow.contains(event.target)){
+//         confirmWindow.style.visibility = 'hidden';
+//     }
+//
+//     let questionBlock = item.getBoundingClientRect();
+//     let questionBlockHeight = confirmWindow.offsetHeight;
+//     confirmWindow.style.top = questionBlock.top - questionBlockHeight - 20 + window.pageYOffset + 'px';
+//     confirmWindow.style.left = questionBlock.left - item.clientWidth + 20 + window.pageXOffset + 'px';
+//     event.stopPropagation();
+// })
+// })
+//
+// document.addEventListener('click', e => {
+//     if (!confirmWindow.contains(e.target)) {
+//         confirmWindow.style.visibility = 'hidden';
+//     }
+// })
 
 
 //Edit message
@@ -59,25 +82,25 @@ editBtn.forEach(item => {
             thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
             thisMessage.style.transition = '1s';
             thisMessage.style.padding = '5px 0';
-            setTimeout(()=>{
+            setTimeout(() => {
                 thisMessage.style.background = '';
                 thisMessage.style.transition = '1s';
-            },500);
+            }, 500);
             thisMessage.focus();
         }
     })
 })
 
-saveBtn.forEach(item=>{
-    item.onclick = e=>{
+saveBtn.forEach(item => {
+    item.onclick = e => {
         // e.preventDefault()
         item.style.display = 'none';
         item.parentElement.previousElementSibling.style.display = 'block';
         e.stopPropagation()
         let form = document.forms.showed_mess;
         let formData = new FormData(form);
-       // let text = document.querySelector('.entered_message').value;
-       // formData.set('mess', 'ololo');
+        // let text = document.querySelector('.entered_message').value;
+        // formData.set('mess', 'ololo');
         fetch('/HomeBase/homeBase.php', {
             method: "POST",
             body: formData
@@ -86,9 +109,9 @@ saveBtn.forEach(item=>{
     }
 
 })
-no.addEventListener('click', () => {
-    confirmWindow.style.visibility = 'hidden';
-})
+// no.addEventListener('click', () => {
+//     confirmWindow.style.visibility = 'hidden';
+// })
 
 
 

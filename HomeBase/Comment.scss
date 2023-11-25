@@ -131,13 +131,13 @@ textarea{
   }
 
 }
-
+.confirm_wrapper{
+  display: none;
+}
 .confirm_delete_message{
-  visibility: hidden;
   position: absolute;
   @include flex(column, center,center);
-border: 1px solid black;
-  //text-align: center;
+  border: 1px solid black;
   width: 140px;
   padding: 10px 0;
   background: white;
@@ -172,3 +172,12 @@ border: 1px solid black;
    }
  }
 }
+.visible{
+  position: absolute;
+  //visibility: visible;
+  display: block;
+}
+
+//.confirm_delete_message{
+//  display: none;
+//}

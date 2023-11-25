@@ -90,6 +90,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             </div>
         </div>
     <?php endwhile; ?>
+    <div class="confirm_wrapper">
         <div class="confirm_delete_message">
             <p>Удалить?</p>
             <div class="choose">
@@ -100,6 +101,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 <button class="no">Нет</button>
             </div>
         </div>
+    </div>
 
 </div>
 

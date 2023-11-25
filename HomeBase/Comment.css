@@ -109,8 +109,10 @@ textarea {
     .comment_of_user .edit_buttons .save {
       display: none; }
 
+.confirm_wrapper {
+  display: none; }
+
 .confirm_delete_message {
-  visibility: hidden;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -142,5 +144,9 @@ textarea {
     margin-top: 6px; }
   .confirm_delete_message .choose .yes {
     margin-right: 10px; }
+
+.visible {
+  position: absolute;
+  display: block; }
 
 /*# sourceMappingURL=Comment.css.map */
