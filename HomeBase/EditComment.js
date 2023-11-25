@@ -10,7 +10,7 @@ let saveBtn = document.querySelectorAll('.save');
                 let thisCoords = delBtn.getBoundingClientRect();
                 console.log(thisCoords)
                 confirmWindow.classList.add("visible")
-                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset - 60 + 'px';
+                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset - 84 + 'px';
                 confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + 'px';
                 event.stopPropagation()
             }

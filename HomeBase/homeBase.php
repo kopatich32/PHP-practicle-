@@ -65,7 +65,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     <?php
     while ($row3 = $out->fetch_assoc()):?>
         <div class="comment_of_user num_<?= $row3['id'] ?>">
-            <input name="val" value="<?= $row3['id'] ?>">
+            <input name="val" value="<?= $row3['id'] ?>" hidden>
             <div class="comment_header">
                 <div class="avatar">
                     <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
@@ -93,23 +93,29 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         </div>
     </div>
 </div>
+
+<div id="primer"></div>
 <script>
     let $ = document.querySelector.bind(document);
     $('.send').addEventListener('click', event=>{
 event.stopPropagation();
 let textOfMessage = $('#message').value;
 let objMessage = JSON.stringify({
-    'message': textOfMessage,
+    'message': {'text': textOfMessage},
 })
         console.log(objMessage)
-        fetch('php-practicle-/HomeBase/formData.php',{
+        fetch('formData.php',{
             method: 'POST',
             body: objMessage,
         })
             .then(resp => resp.json())
-            .then(data => console.log(data))
+            .then(data =>
+                showResponse(data))
     })
 
+    function showResponse(req){
+        $('#primer').innerText =  req.result.text;
+    }
 </script>
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
