@@ -29,11 +29,7 @@ if (isset($_GET['refactor'])) {
 
 
 //////
-if (isset($_POST['send'])) {
     $time_of_message = date('d-m-Y H:i:s');
-    $text_of_message = $_POST['comment'];
-    $row = $db->query("INSERT INTO `message`(`user`,`message`, `date`) VALUES ('lala','$text_of_message','$time_of_message')");
-}
 
 if (isset($_GET['del'])) {
     $current_id = $_GET['del'];
@@ -59,18 +55,15 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             <div class="symbols">Осталось символов</div>
             <div class="counter"></div>
         </div>
-            <textarea id="message" placeholder="Комментарий" maxlength="100" name="comment"></textarea>
+            <textarea id="message" placeholder="Комментарий" maxlength="100"></textarea>
             <div class="buttons">
-                <button class="close" name="close">Закрыть</button>
-                <button class="send" type="submit" name="send">Отправить</button>
+                <button class="close">Закрыть</button>
+                <button class="send">Отправить</button>
                 <div id="out"></div>
             </div>
     </div>
     <?php
-
-    while ($row3 = $out->fetch_assoc()):
-        ?>
-
+    while ($row3 = $out->fetch_assoc()):?>
         <div class="comment_of_user num_<?= $row3['id'] ?>">
             <input name="val" value="<?= $row3['id'] ?>">
             <div class="comment_header">
@@ -82,11 +75,9 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             </div>
                 <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
             <div class="edit_buttons">
-                <button class="editBtn" name="edit">Редактировать</button>
-                <a class="edit" href="?refactor=<?= $row3['id'] ?>">
-                    <button class="save" type="submit" name="save">Сохранить</button>
-                </a>
-                    <button class="delete" name="admin_del_btn">Удалить</button>
+                <button class="editBtn">Редактировать</button>
+                    <button class="save">Сохранить</button>
+                    <button class="delete" >Удалить</button>
             </div>
         </div>
     <?php endwhile; ?>
@@ -94,17 +85,32 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         <div class="confirm_delete_message">
             <p>Удалить?</p>
             <div class="choose">
-
                 <a href="?del=<?= $row3['id'] ?>">
-                    <button class="yes" name="yes" type="submit">Да</button>
+                    <button class="yes">Да</button>
                 </a>
                 <button class="no">Нет</button>
             </div>
         </div>
     </div>
-
 </div>
+<script>
+    let $ = document.querySelector.bind(document);
+    $('.send').addEventListener('click', event=>{
+event.stopPropagation();
+let textOfMessage = $('#message').value;
+let objMessage = JSON.stringify({
+    'message': textOfMessage,
+})
+        console.log(objMessage)
+        fetch('php-practicle-/HomeBase/formData.php',{
+            method: 'POST',
+            body: objMessage,
+        })
+            .then(resp => resp.json())
+            .then(data => console.log(data))
+    })
 
+</script>
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
 </body>
