@@ -26,7 +26,6 @@
         let name = $('#name').value;
         let email = $('#email').value;
         let obj = JSON.stringify({
-            'action': 'reg',
             'payload': {
                 'login': login,
                 'pass': pass,
