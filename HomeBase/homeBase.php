@@ -62,6 +62,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 <div id="out"></div>
             </div>
     </div>
+
     <?php
     while ($row3 = $out->fetch_assoc()):?>
         <div class="comment_of_user num_<?= $row3['id'] ?>">
@@ -94,8 +95,8 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     </div>
 </div>
 
-<div id="primer"></div>
 <script>
+
     let $ = document.querySelector.bind(document);
     $('.send').addEventListener('click', event=>{
 event.stopPropagation();
@@ -111,10 +112,32 @@ let objMessage = JSON.stringify({
             .then(resp => resp.json())
             .then(data =>
                 showResponse(data))
+        $('#message').value = null;
+        $('.counter').innerText = $('#message').getAttribute('maxlength');
     })
-
     function showResponse(req){
-        $('#primer').innerText =  req.result.text;
+        console.log(req)
+        let date = new Date();
+let sendTime = date.toLocaleDateString() +' ' + date.toLocaleTimeString();
+      let newMessage =  `
+<div class="comment_of_user num_${req.id}">
+            <div class="comment_header">
+                <div class="avatar">
+                    <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
+                </div>
+                <div class="user_name">KotE</div>
+                <div class="time">${req.time}</div>
+            </div>
+                <div class="entered_message" contenteditable="false">${req.result.text}</div>
+            <div class="edit_buttons">
+                <button class="editBtn">Редактировать</button>
+                    <button class="save">Сохранить</button>
+                    <button class="delete" >Удалить</button>
+            </div>
+        </div>
+`
+        $('.comment_wrapper').insertAdjacentHTML("afterend", newMessage);
+
     }
 </script>
 <script src="CharsCounter.js"></script>
