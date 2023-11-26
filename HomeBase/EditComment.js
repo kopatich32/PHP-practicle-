@@ -3,15 +3,14 @@ let deleteBtn = document.querySelectorAll('.delete');
 let confirmWindow = document.querySelector('.confirm_wrapper');
 let no = document.querySelector('.no');
 let saveBtn = document.querySelectorAll('.save');
-
     deleteBtn.forEach(delBtn => {
         delBtn.addEventListener('click',function(event){
             if (delBtn.contains(event.target)) {
                 let thisCoords = delBtn.getBoundingClientRect();
                 console.log(thisCoords)
                 confirmWindow.classList.add("visible")
-                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset - 84 + 'px';
-                confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + 'px';
+                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
+                confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
                 event.stopPropagation()
             }
         })
@@ -54,3 +53,4 @@ saveBtn.forEach(item => {
 no.addEventListener('click', () => {
     confirmWindow.classList.remove('visible');
 })
+

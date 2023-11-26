@@ -10,4 +10,3 @@ if($json['message']) {
         echo json_encode(['result' => $json['message'] ,'id'=>$last, 'time'=>$date_of_message]);
     }
 }
-

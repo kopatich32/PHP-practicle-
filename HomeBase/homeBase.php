@@ -117,8 +117,6 @@ let objMessage = JSON.stringify({
     })
     function showResponse(req){
         console.log(req)
-        let date = new Date();
-let sendTime = date.toLocaleDateString() +' ' + date.toLocaleTimeString();
       let newMessage =  `
 <div class="comment_of_user num_${req.id}">
             <div class="comment_header">
@@ -137,7 +135,6 @@ let sendTime = date.toLocaleDateString() +' ' + date.toLocaleTimeString();
         </div>
 `
         $('.comment_wrapper').insertAdjacentHTML("afterend", newMessage);
-
     }
 </script>
 <script src="CharsCounter.js"></script>
