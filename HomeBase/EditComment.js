@@ -1,20 +1,26 @@
 let editBtn = document.querySelectorAll('.editBtn');
-let deleteBtn = document.querySelectorAll('.delete');
 let confirmWindow = document.querySelector('.confirm_wrapper');
 let no = document.querySelector('.no');
 let saveBtn = document.querySelectorAll('.save');
-    deleteBtn.forEach(delBtn => {
-        delBtn.addEventListener('click',function(event){
-            if (delBtn.contains(event.target)) {
-                let thisCoords = delBtn.getBoundingClientRect();
-                console.log(thisCoords)
-                confirmWindow.classList.add("visible")
-                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
-                confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
-                event.stopPropagation()
-            }
-        })
-    })
+let deleteBtn = document.querySelectorAll('.delete');
+
+
+// function show(){
+//
+//     deleteBtn.forEach(delBtn => {
+//         delBtn.addEventListener('click',function(event){
+//             if (delBtn.contains(event.target)) {
+//                 let thisCoords = delBtn.getBoundingClientRect();
+//                 confirmWindow.classList.add("vvisible")
+//                 confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
+//                 confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+//                 event.stopPropagation()
+//             }
+//         })
+//     })
+// }
+// show();
+
 document.addEventListener('click', function(event){
 if (!confirmWindow.contains(event.target)) {
         confirmWindow.classList.remove('visible');

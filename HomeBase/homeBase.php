@@ -99,11 +99,11 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 
     let $ = document.querySelector.bind(document);
     $('.send').addEventListener('click', event=>{
-event.stopPropagation();
-let textOfMessage = $('#message').value;
-let objMessage = JSON.stringify({
-    'message': {'text': textOfMessage},
-})
+        event.stopPropagation();
+        let textOfMessage = $('#message').value;
+        let objMessage = JSON.stringify({
+            'message': {'text': textOfMessage},
+        })
         console.log(objMessage)
         fetch('formData.php',{
             method: 'POST',
@@ -130,11 +130,28 @@ let objMessage = JSON.stringify({
             <div class="edit_buttons">
                 <button class="editBtn">Редактировать</button>
                     <button class="save">Сохранить</button>
-                    <button class="delete" >Удалить</button>
+                    <button class="delete">Удалить</button>
             </div>
         </div>
 `
         $('.comment_wrapper').insertAdjacentHTML("afterend", newMessage);
+
+        let allBTN = document.querySelectorAll('.delete');
+        allBTN.forEach(delBtn=>{
+                delBtn.addEventListener("click", ()=>{
+                    confirmWindow.classList.add("vvisible");
+                    let thisCoords = delBtn.getBoundingClientRect();
+                    confirmWindow.setAttribute('title', 'bugaga')
+                    confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
+                    confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+                    console.log(delBtn + '  есть контакт')
+                })
+                // let thisCoords = delBtn.getBoundingClientRect();
+                // confirmWindow.classList.add("visible")
+                // confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
+                // confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+
+        })
     }
 </script>
 <script src="CharsCounter.js"></script>
