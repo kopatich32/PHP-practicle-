@@ -5,25 +5,25 @@ let saveBtn = document.querySelectorAll('.save');
 let deleteBtn = document.querySelectorAll('.delete');
 
 
-// function show(){
-//
-//     deleteBtn.forEach(delBtn => {
-//         delBtn.addEventListener('click',function(event){
-//             if (delBtn.contains(event.target)) {
-//                 let thisCoords = delBtn.getBoundingClientRect();
-//                 confirmWindow.classList.add("vvisible")
-//                 confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
-//                 confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
-//                 event.stopPropagation()
-//             }
-//         })
-//     })
-// }
-// show();
+
+    deleteBtn.forEach(delBtn => {
+        delBtn.addEventListener('click',function(event){
+            if (delBtn.contains(event.target)) {
+                console.log('lalal')
+
+                let thisCoords = delBtn.getBoundingClientRect();
+                confirmWindow.classList.add("shows")
+                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
+                confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+                event.stopPropagation()
+            }
+        })
+    })
+
 
 document.addEventListener('click', function(event){
 if (!confirmWindow.contains(event.target)) {
-        confirmWindow.classList.remove('visible');
+        confirmWindow.classList.remove('shows');
     }
 })
 
@@ -57,6 +57,6 @@ saveBtn.forEach(item => {
     }
 })
 no.addEventListener('click', () => {
-    confirmWindow.classList.remove('visible');
+    confirmWindow.classList.remove('shows');
 })
 

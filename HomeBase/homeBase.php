@@ -49,6 +49,9 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     <link rel="stylesheet" href="Comment.css">
 </head>
 <body>
+<a  href="#down">
+    <div id="back">Туда</div>
+</a>
 <div class="container">
     <div class="comment_wrapper">
         <div class="left_symbols">
@@ -139,9 +142,8 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         let allBTN = document.querySelectorAll('.delete');
         allBTN.forEach(delBtn=>{
                 delBtn.addEventListener("click", ()=>{
-                    confirmWindow.classList.add("vvisible");
+                    confirmWindow.classList.toggle("shows2");
                     let thisCoords = delBtn.getBoundingClientRect();
-                    confirmWindow.setAttribute('title', 'bugaga')
                     confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
                     confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
                     console.log(delBtn + '  есть контакт')
@@ -156,5 +158,45 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 </script>
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
+
+
+<a id="down" href="#back">
+    <div>обратно</div>
+</a>
+<table>
+    <tr>
+        <td colspan="4">1</td>
+<!--        <td>2</td>-->
+<!--        <td>3</td>-->
+<!--        <td>4</td>-->
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+</table>
+
+
+
 </body>
 </html>

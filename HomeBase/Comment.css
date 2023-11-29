@@ -110,7 +110,8 @@ textarea {
       display: none; }
 
 .confirm_wrapper {
-  display: none; }
+  display: none;
+  position: relative; }
 
 .confirm_delete_message {
   position: absolute;
@@ -145,8 +146,12 @@ textarea {
   .confirm_delete_message .choose .yes {
     margin-right: 10px; }
 
-.vvisible {
+.shows {
   position: absolute;
   display: block; }
+
+.shows2 {
+  position: absolute !important;
+  display: block !important; }
 
 /*# sourceMappingURL=Comment.css.map */

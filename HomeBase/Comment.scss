@@ -133,6 +133,7 @@ textarea{
 }
 .confirm_wrapper{
   display: none;
+  position: relative;
 }
 .confirm_delete_message{
   position: absolute;
@@ -172,10 +173,14 @@ textarea{
    }
  }
 }
-.vvisible{
+.shows{
   position: absolute;
-  //visibility: visible;
   display: block;
+}
+
+.shows2{
+  position: absolute !important;
+  display: block !important;
 }
 
 //.confirm_delete_message{
