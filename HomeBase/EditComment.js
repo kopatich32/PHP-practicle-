@@ -6,6 +6,8 @@ let deleteBtn = document.querySelectorAll('.delete');
 
 
 
+
+
     deleteBtn.forEach(delBtn => {
         delBtn.addEventListener('click',function(event){
             if (delBtn.contains(event.target)) {
@@ -19,6 +21,12 @@ let deleteBtn = document.querySelectorAll('.delete');
             }
         })
     })
+
+
+
+
+
+
 
 
 document.addEventListener('click', function(event){
@@ -57,6 +65,7 @@ saveBtn.forEach(item => {
     }
 })
 no.addEventListener('click', () => {
+    console.log('no btn')
     confirmWindow.classList.remove('shows');
 })
 

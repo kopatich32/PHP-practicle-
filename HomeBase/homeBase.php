@@ -3,39 +3,14 @@ $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
-////
-//    $text = @$_GET['message'];
-//    print_r(@$_POST['message']);
-
-//if (isset($_POST['message'])) {
-//    $edit_id = $_GET['refactor'];
-//    $text = @$_POST['message'];
-//    print_r(@$_POST['message']);
-//    print_r($edit_id);
-//    print_r($_GET['refactor']);
-//    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = 410");
-//}
-
-if (isset($_GET['refactor'])) {
-    $edit_id = $_GET['refactor'];
-//    $text = @$_POST['message'];
-//    print_r(@$_POST['message']);
-//    print_r($edit_id);
-    print_r($_GET['refactor']);
-//    $row = $db->query("UPDATE `message` SET `user`='ololo',`message`= '$text' WHERE `id` = '$edit_id'");
-}
-
-
-
 
 //////
-    $time_of_message = date('d-m-Y H:i:s');
+$time_of_message = date('d-m-Y H:i:s');
 
 if (isset($_GET['del'])) {
     $current_id = $_GET['del'];
     $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
 }
-
 $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 ?>
 <!doctype html>
@@ -49,7 +24,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     <link rel="stylesheet" href="Comment.css">
 </head>
 <body>
-<a  href="#down">
+<a href="#down">
     <div id="back">Туда</div>
 </a>
 <div class="container">
@@ -58,12 +33,12 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             <div class="symbols">Осталось символов</div>
             <div class="counter"></div>
         </div>
-            <textarea id="message" placeholder="Комментарий" maxlength="100"></textarea>
-            <div class="buttons">
-                <button class="close">Закрыть</button>
-                <button class="send">Отправить</button>
-                <div id="out"></div>
-            </div>
+        <textarea id="message" placeholder="Комментарий" maxlength="100"></textarea>
+        <div class="buttons">
+            <button class="close">Закрыть</button>
+            <button class="send">Отправить</button>
+            <div id="out"></div>
+        </div>
     </div>
 
     <?php
@@ -77,11 +52,11 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 <div class="user_name">KotE</div>
                 <div class="time"><?= $row3['date'] ?></div>
             </div>
-                <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
+            <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
             <div class="edit_buttons">
                 <button class="editBtn">Редактировать</button>
-                    <button class="save">Сохранить</button>
-                    <button class="delete" >Удалить</button>
+                <button class="save">Сохранить</button>
+                <button class="delete">Удалить</button>
             </div>
         </div>
     <?php endwhile; ?>
@@ -101,14 +76,14 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 <script>
 
     let $ = document.querySelector.bind(document);
-    $('.send').addEventListener('click', event=>{
+    $('.send').addEventListener('click', event => {
         event.stopPropagation();
         let textOfMessage = $('#message').value;
         let objMessage = JSON.stringify({
             'message': {'text': textOfMessage},
         })
         console.log(objMessage)
-        fetch('formData.php',{
+        fetch('formData.php', {
             method: 'POST',
             body: objMessage,
         })
@@ -118,9 +93,10 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         $('#message').value = null;
         $('.counter').innerText = $('#message').getAttribute('maxlength');
     })
-    function showResponse(req){
+
+    function showResponse(req) {
         console.log(req)
-      let newMessage =  `
+        let newMessage = `
 <div class="comment_of_user num_${req.id}">
             <div class="comment_header">
                 <div class="avatar">
@@ -140,63 +116,97 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         $('.comment_wrapper').insertAdjacentHTML("afterend", newMessage);
 
         let allBTN = document.querySelectorAll('.delete');
-        allBTN.forEach(delBtn=>{
-                delBtn.addEventListener("click", ()=>{
-                    confirmWindow.classList.toggle("shows2");
-                    let thisCoords = delBtn.getBoundingClientRect();
-                    confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
-                    confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
-                    console.log(delBtn + '  есть контакт')
-                })
-                // let thisCoords = delBtn.getBoundingClientRect();
-                // confirmWindow.classList.add("visible")
-                // confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
-                // confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
-
+        allBTN.forEach(delBtn => {
+            delBtn.addEventListener("click", () => {
+                confirmWindow.classList.add("shows2");
+                let thisCoords = delBtn.getBoundingClientRect();
+                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
+                confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+                console.log(delBtn + '  есть контакт')
+            })
+            no.addEventListener('click', () => {
+                console.log('no btn')
+                confirmWindow.classList.remove('shows2');
+            })
         })
     }
+
+    let allSaveBtns = document.querySelectorAll('.save');
+    allSaveBtns.forEach(btn => {
+        btn.addEventListener('click', event => {
+            event.preventDefault();
+            let editedMessage = event.target.closest('.edit_buttons').previousElementSibling.innerText;
+            let newMess = JSON.stringify({
+                'edited': {'message': editedMessage}
+            });
+            fetch('editMess.php', {
+                method: 'POST',
+                body: newMess,
+            })
+                .then(resp => resp.json())
+                .then(data => console.log(data))
+        })
+    })
 </script>
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
 
-
-<a id="down" href="#back">
-    <div>обратно</div>
-</a>
-<table>
+<div>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, nesciunt, unde. Ad eligendi facilis quae? Amet
+    asperiores, beatae, commodi consectetur corporis dolore eius eveniet ex minus officia pariatur repellendus
+    voluptate?
+</div>
+<style>
+    table tr td{
+        border: 1px solid red;
+        width: 20px;
+        height: 20px;
+        text-align: center;
+    }
+</style>
+<table style="border: 2px solid black; border-collapse: collapse;">
     <tr>
-        <td colspan="4">1</td>
-<!--        <td>2</td>-->
-<!--        <td>3</td>-->
-<!--        <td>4</td>-->
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
     </tr>
     <tr>
         <td>1</td>
         <td>2</td>
         <td>3</td>
         <td>4</td>
+        <td>5</td>
     </tr>
     <tr>
         <td>1</td>
         <td>2</td>
         <td>3</td>
         <td>4</td>
+        <td>5</td>
     </tr>
     <tr>
         <td>1</td>
         <td>2</td>
         <td>3</td>
         <td>4</td>
+        <td>5</td>
     </tr>
     <tr>
         <td>1</td>
         <td>2</td>
         <td>3</td>
         <td>4</td>
+        <td>5</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
     </tr>
 </table>
-
-
-
 </body>
 </html>
