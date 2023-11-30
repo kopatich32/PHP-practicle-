@@ -24,9 +24,6 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     <link rel="stylesheet" href="Comment.css">
 </head>
 <body>
-<a href="#down">
-    <div id="back">Туда</div>
-</a>
 <div class="container">
     <div class="comment_wrapper">
         <div class="left_symbols">
@@ -43,7 +40,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 
     <?php
     while ($row3 = $out->fetch_assoc()):?>
-        <div class="comment_of_user num_<?= $row3['id'] ?>">
+        <div class="comment_of_user" data-num="<?=$row3['id'] ?>">
             <input name="val" value="<?= $row3['id'] ?>" hidden>
             <div class="comment_header">
                 <div class="avatar">
@@ -97,7 +94,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     function showResponse(req) {
         console.log(req)
         let newMessage = `
-<div class="comment_of_user num_${req.id}">
+<div class="comment_of_user data-num="${req.id}">
             <div class="comment_header">
                 <div class="avatar">
                     <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
@@ -135,10 +132,15 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     allSaveBtns.forEach(btn => {
         btn.addEventListener('click', event => {
             event.preventDefault();
+            let changeID = event.target.closest('.comment_of_user').dataset.num;
+            let time = event.target.closest('.comment_of_user').querySelector('.time').innerText;
+            console.log(time)
+            console.log(changeID)
             let editedMessage = event.target.closest('.edit_buttons').previousElementSibling.innerText;
             let newMess = JSON.stringify({
-                'edited': {'message': editedMessage}
+                'edited': {'message': editedMessage, 'changeID': changeID, 'time': time}
             });
+            let url = 'formData.php';
             fetch('editMess.php', {
                 method: 'POST',
                 body: newMess,
@@ -150,63 +152,5 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 </script>
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
-
-<div>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, nesciunt, unde. Ad eligendi facilis quae? Amet
-    asperiores, beatae, commodi consectetur corporis dolore eius eveniet ex minus officia pariatur repellendus
-    voluptate?
-</div>
-<style>
-    table tr td{
-        border: 1px solid red;
-        width: 20px;
-        height: 20px;
-        text-align: center;
-    }
-</style>
-<table style="border: 2px solid black; border-collapse: collapse;">
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-        <td>5</td>
-    </tr>
-</table>
 </body>
 </html>
