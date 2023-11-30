@@ -3,14 +3,6 @@ $db = @new mysqli('localhost', 'root', '', 'comment');
 if ($db->connect_errno):
     echo 'Error number: ' . $db->connect_errno . '. Reason - ' . $db->connect_error;
 endif;
-
-//////
-$time_of_message = date('d-m-Y H:i:s');
-
-if (isset($_GET['del'])) {
-    $current_id = $_GET['del'];
-    $del = $db->query("DELETE FROM `message` WHERE `id` = $current_id;");
-}
 $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
 ?>
 <!doctype html>
@@ -61,18 +53,15 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         <div class="confirm_delete_message">
             <p>Удалить?</p>
             <div class="choose">
-                <a href="?del=<?= $row3['id'] ?>">
                     <button class="yes">Да</button>
-                </a>
                 <button class="no">Нет</button>
             </div>
         </div>
     </div>
 </div>
-
 <script>
-
     let $ = document.querySelector.bind(document);
+
     $('.send').addEventListener('click', event => {
         event.stopPropagation();
         let textOfMessage = $('#message').value;
@@ -111,7 +100,6 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         </div>
 `
         $('.comment_wrapper').insertAdjacentHTML("afterend", newMessage);
-
         let allBTN = document.querySelectorAll('.delete');
         allBTN.forEach(delBtn => {
             delBtn.addEventListener("click", () => {
@@ -119,10 +107,8 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 let thisCoords = delBtn.getBoundingClientRect();
                 confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
                 confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
-                console.log(delBtn + '  есть контакт')
             })
             no.addEventListener('click', () => {
-                console.log('no btn')
                 confirmWindow.classList.remove('shows2');
             })
         })
@@ -140,7 +126,6 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             let newMess = JSON.stringify({
                 'edited': {'message': editedMessage, 'changeID': changeID, 'time': time}
             });
-            let url = 'formData.php';
             fetch('editMess.php', {
                 method: 'POST',
                 body: newMess,

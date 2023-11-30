@@ -5,33 +5,45 @@ let saveBtn = document.querySelectorAll('.save');
 let deleteBtn = document.querySelectorAll('.delete');
 
 
+deleteBtn.forEach(delBtn => {
+    let currentMess;
+    delBtn.addEventListener('click', function (event) {
+        if (delBtn.contains(event.target)) {
+            currentMess = event.target.closest('.comment_of_user').dataset.num;
+            console.log(currentMess)
 
+            let thisCoords = delBtn.getBoundingClientRect();
+            // confirmWindow.classList.add("shows")
+            confirmWindow.style.position = 'absolute'
+            confirmWindow.style.display = 'block'
+            confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
+            confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+            event.stopPropagation()
+        }
+    })
 
-
-    deleteBtn.forEach(delBtn => {
-        delBtn.addEventListener('click',function(event){
-            if (delBtn.contains(event.target)) {
-                console.log('lalal')
-
-                let thisCoords = delBtn.getBoundingClientRect();
-                confirmWindow.classList.add("shows")
-                confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY- 84 + 'px';
-                confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
-                event.stopPropagation()
-            }
+    $('.yes').addEventListener('click', function (event) {
+        fetch('deleteMess.php', {
+            method: 'POST',
+            body: JSON.stringify({'delete': {'deleteMessage': currentMess}})
         })
+            .then(resp => resp.json())
+            .then(data => deleteMessage(data))
     })
 
 
+})
+function deleteMessage(letter){
+    let targetDel = document.querySelector(`div[data-num="${letter.id}"]`);
+    targetDel.remove();
+    confirmWindow.style.display = 'none';
 
+}
 
-
-
-
-
-document.addEventListener('click', function(event){
-if (!confirmWindow.contains(event.target)) {
-        confirmWindow.classList.remove('shows');
+document.addEventListener('click', function (event) {
+    if (!confirmWindow.contains(event.target)) {
+        // confirmWindow.classList.remove('shows');
+        confirmWindow.style.display = 'none';
     }
 })
 
@@ -66,6 +78,6 @@ saveBtn.forEach(item => {
 })
 no.addEventListener('click', () => {
     console.log('no btn')
-    confirmWindow.classList.remove('shows');
+    // confirmWindow.classList.remove('shows');
+    confirmWindow.style.display = 'none'
 })
-
