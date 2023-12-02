@@ -14,6 +14,8 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Comment field</title>
     <link rel="stylesheet" href="Comment.css">
+    <link rel="icon" href="upload/backgroundAbout">
+
 </head>
 <body>
 <div class="container">
@@ -30,25 +32,27 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         </div>
     </div>
 
-    <?php
-    while ($row3 = $out->fetch_assoc()):?>
-        <div class="comment_of_user" data-num="<?=$row3['id'] ?>">
-            <input name="val" value="<?= $row3['id'] ?>" hidden>
-            <div class="comment_header">
-                <div class="avatar">
-                    <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
-                </div>
-                <div class="user_name">KotE</div>
-                <div class="time"><?= $row3['date'] ?></div>
-            </div>
-            <div class="entered_message" contenteditable="false"><?= $row3['message'] ?></div>
-            <div class="edit_buttons">
-                <button class="editBtn">Редактировать</button>
-                <button class="save">Сохранить</button>
-                <button class="delete">Удалить</button>
-            </div>
-        </div>
-    <?php endwhile; ?>
+<!--    --><?php
+//    while ($row3 = $out->fetch_assoc()):?>
+<!--        <div class="comment_of_user" data-num="--><?php //=$row3['id'] ?><!--">-->
+<!--            <input name="val" value="--><?php //= $row3['id'] ?><!--" hidden>-->
+<!--            <div class="comment_header">-->
+<!--                <div class="avatar">-->
+<!--                    <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">-->
+<!--                </div>-->
+<!--                <div class="user_name">KotE</div>-->
+<!--                <div class="time">--><?php //= $row3['date'] ?><!--</div>-->
+<!--            </div>-->
+<!--            <div class="entered_message" contenteditable="false">--><?php //= $row3['message'] ?><!--</div>-->
+<!--            <div class="edit_buttons">-->
+<!--                <button class="editBtn">Редактировать</button>-->
+<!--                <button class="save">Сохранить</button>-->
+<!--                <button class="delete">Удалить</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    --><?php //endwhile; ?>
+
+
     <div class="confirm_wrapper">
         <div class="confirm_delete_message">
             <p>Удалить?</p>
@@ -99,17 +103,25 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             </div>
         </div>
 `
-        $('.comment_wrapper').insertAdjacentHTML("afterend", newMessage);
+        $('.container').insertAdjacentHTML("beforeend", newMessage);
         let allBTN = document.querySelectorAll('.delete');
         allBTN.forEach(delBtn => {
-            delBtn.addEventListener("click", () => {
-                confirmWindow.classList.add("shows2");
+            delBtn.addEventListener("click", (event) => {
+                if (delBtn.contains(event.target)) {
+                    event.stopPropagation()
+                    event.preventDefault()
+                    confirmWindow.classList.add('shows2')
+                    let thisCoords = delBtn.getBoundingClientRect();
+                    confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
+                    confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+                }
                 let thisCoords = delBtn.getBoundingClientRect();
                 confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
                 confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
             })
             no.addEventListener('click', () => {
                 confirmWindow.classList.remove('shows2');
+                confirmWindow.style.display = 'block'
             })
         })
     }
@@ -134,7 +146,42 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 .then(data => console.log(data))
         })
     })
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+        fetch('getExistMessage.php',{
+            method: 'POST',
+            body: JSON.stringify({'answer':{'rows': 'lala'}})
+        })
+            .then(response => response.json())
+            .then(data =>
+            existMess(data))
+    })
+
+    function existMess(mess){
+        console.log(mess)
+        for(let i = 0; i< mess.length; i++){
+            let message = `
+        <div class="comment_of_user" data-num="${mess[i].id}">
+            <input name="val" value="${mess[i].id}" hidden>
+            <div class="comment_header">
+                <div class="avatar">
+                    <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
+                </div>
+                <div class="user_name">KotE</div>
+                <div class="time">${mess[i].date}</div>
+            </div>
+            <div class="entered_message" contenteditable="false">${mess[i].message}</div>
+            <div class="edit_buttons">
+                <button class="editBtn">Редактировать</button>
+                <button class="save">Сохранить</button>
+                <button class="delete">Удалить</button>
+            </div>
+        </div>`
+            $('.comment_wrapper').insertAdjacentHTML("afterend", message);
+        }
+    }
 </script>
+
 <script src="CharsCounter.js"></script>
 <script src="EditComment.js"></script>
 </body>

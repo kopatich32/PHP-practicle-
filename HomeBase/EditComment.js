@@ -13,7 +13,6 @@ deleteBtn.forEach(delBtn => {
             console.log(currentMess)
 
             let thisCoords = delBtn.getBoundingClientRect();
-            // confirmWindow.classList.add("shows")
             confirmWindow.style.position = 'absolute'
             confirmWindow.style.display = 'block'
             confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
@@ -30,8 +29,6 @@ deleteBtn.forEach(delBtn => {
             .then(resp => resp.json())
             .then(data => deleteMessage(data))
     })
-
-
 })
 function deleteMessage(letter){
     let targetDel = document.querySelector(`div[data-num="${letter.id}"]`);
@@ -42,7 +39,7 @@ function deleteMessage(letter){
 
 document.addEventListener('click', function (event) {
     if (!confirmWindow.contains(event.target)) {
-        // confirmWindow.classList.remove('shows');
+        confirmWindow.classList.remove('shows2');
         confirmWindow.style.display = 'none';
     }
 })
