@@ -43,6 +43,125 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     </div>
 </div>
 <script>
+  class  Comment {
+        sendMessage(){
+            let $ = document.querySelector.bind(document);
+            $('.send').addEventListener('click', event => {
+                event.stopPropagation();
+                if($('#message').value == "") return
+                let textOfMessage = $('#message').value;
+                let objMessage = JSON.stringify({
+                    'message': {'text': textOfMessage},
+                })
+                console.log(objMessage)
+                fetch('formData.php', {
+                    method: 'POST',
+                    body: objMessage,
+                })
+                    .then(resp => resp.json())
+                    .then(data =>
+                        showResponse(data))
+                $('#message').value = null;
+                $('.counter').innerText = $('#message').getAttribute('maxlength');
+            })
+        }
+        deleteMessage(){
+            let confirmWindow = document.querySelector('.confirm_wrapper');
+            let deleteBtn = document.querySelectorAll('.delete');
+            deleteBtn.forEach(delBtn => {
+                let currentMess;
+                delBtn.addEventListener('click', function (event) {
+                    if (delBtn.contains(event.target)) {
+                        currentMess = event.target.closest('.comment_of_user').dataset.num;
+                        console.log(currentMess)
+
+                        let thisCoords = delBtn.getBoundingClientRect();
+                        confirmWindow.style.position = 'absolute'
+                        confirmWindow.style.display = 'block'
+                        confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
+                        confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
+                        event.stopPropagation()
+                    }
+                })
+
+                $('.yes').addEventListener('click', function (event) {
+                    fetch('deleteMess.php', {
+                        method: 'POST',
+                        body: JSON.stringify({'delete': {'deleteMessage': currentMess}})
+                    })
+                        .then(resp => resp.json())
+                        .then(data => deleteMessage(data))
+                })
+            })
+            function deleteMessage(letter){
+                let targetDel = document.querySelector(`div[data-num="${letter.id}"]`);
+                targetDel.remove();
+                confirmWindow.style.display = 'none';
+
+            }
+        }
+
+        editMessage(){
+            let editBtn = document.querySelectorAll('.editBtn');
+            editBtn.forEach(item => {
+                item.addEventListener('click', event => {
+                    event.preventDefault();
+                    let thisMessage = event.target.closest('.edit_buttons').previousElementSibling;
+                    if (item.contains(event.target)) {
+                        thisMessage.removeAttribute('contenteditable');
+                        thisMessage.setAttribute('contenteditable', "true");
+                        item.style.display = 'none';
+                        item.nextElementSibling.style.display = 'block';
+                        thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
+                        thisMessage.style.transition = '1s';
+                        setTimeout(() => {
+                            thisMessage.style.background = '';
+                            thisMessage.style.transition = '1s';
+                        }, 500);
+                        thisMessage.focus();
+                    }
+                })
+            })
+        }
+        sendEditMessage(){
+            let allSaveBtns = document.querySelectorAll('.save');
+            allSaveBtns.forEach(btn => {
+                btn.addEventListener('click', event => {
+                    event.preventDefault();
+                    btn.style.display = 'none';
+                    btn.parentElement.previousElementSibling.setAttribute('contenteditable', "false");
+                    btn.previousElementSibling.style.display = 'block';
+                    let changeID = event.target.closest('.comment_of_user').dataset.num;
+                    let time = event.target.closest('.comment_of_user').querySelector('.time').innerText;
+                    console.log(time)
+                    console.log(changeID)
+                    let editedMessage = event.target.closest('.edit_buttons').previousElementSibling.innerText;
+                    let newMess = JSON.stringify({
+                        'edited': {'message': editedMessage, 'changeID': changeID, 'time': time}
+                    });
+                    fetch('editMess.php', {
+                        method: 'POST',
+                        body: newMess,
+                    })
+                        .then(resp => resp.json())
+                        .then(data => console.log(data))
+                })
+            })
+        }
+    }
+  let exem = new Comment();
+
+
+
+
+
+
+
+
+
+
+
+
     let $ = document.querySelector.bind(document);
     $('.send').addEventListener('click', event => {
         event.stopPropagation();
@@ -66,7 +185,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     function showResponse(req) {
         console.log(req)
         let newMessage = `
-<div class="comment_of_user data-num="${req.id}">
+<div class="comment_of_user" data-num="${req.id}">
             <div class="comment_header">
                 <div class="avatar">
                     <img width="60" height="60" src="IMG_20231026_001815.jpg" alt="User avatar">
@@ -83,6 +202,9 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
         </div>`
 
         $('.container').insertAdjacentHTML("beforeend", newMessage);
+        exem.editMessage();
+        exem.sendEditMessage();
+        exem.deleteMessage();
     }
 
     document.addEventListener('DOMContentLoaded', ()=>{
@@ -119,88 +241,13 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             $('.comment_wrapper').insertAdjacentHTML("afterend", message);
         }
         // delete message
-        let deleteBtn = document.querySelectorAll('.delete');
-        deleteBtn.forEach(delBtn => {
-            let currentMess;
-            delBtn.addEventListener('click', function (event) {
-                if (delBtn.contains(event.target)) {
-                    currentMess = event.target.closest('.comment_of_user').dataset.num;
-                    console.log(currentMess)
-
-                    let thisCoords = delBtn.getBoundingClientRect();
-                    confirmWindow.style.position = 'absolute'
-                    confirmWindow.style.display = 'block'
-                    confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
-                    confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
-                    event.stopPropagation()
-                }
-            })
-
-            $('.yes').addEventListener('click', function (event) {
-                fetch('deleteMess.php', {
-                    method: 'POST',
-                    body: JSON.stringify({'delete': {'deleteMessage': currentMess}})
-                })
-                    .then(resp => resp.json())
-                    .then(data => deleteMessage(data))
-            })
-        })
-        function deleteMessage(letter){
-            let targetDel = document.querySelector(`div[data-num="${letter.id}"]`);
-            targetDel.remove();
-            confirmWindow.style.display = 'none';
-
-        }
-        //edit message
-        let editBtn = document.querySelectorAll('.editBtn');
-        editBtn.forEach(item => {
-            item.addEventListener('click', event => {
-                event.preventDefault();
-                let thisMessage = event.target.closest('.edit_buttons').previousElementSibling;
-                if (item.contains(event.target)) {
-                    thisMessage.removeAttribute('contenteditable');
-                    thisMessage.setAttribute('contenteditable', "true");
-                    item.style.display = 'none';
-                    item.nextElementSibling.style.display = 'block';
-                    thisMessage.style.background = 'rgba(82, 176, 112, 0.85)';
-                    thisMessage.style.transition = '1s';
-                    setTimeout(() => {
-                        thisMessage.style.background = '';
-                        thisMessage.style.transition = '1s';
-                    }, 500);
-                    thisMessage.focus();
-                }
-            })
-        })
-
-//send edit
-        let allSaveBtns = document.querySelectorAll('.save');
-        allSaveBtns.forEach(btn => {
-            btn.addEventListener('click', event => {
-                event.preventDefault();
-                btn.style.display = 'none';
-                btn.parentElement.previousElementSibling.setAttribute('contenteditable', "false");
-                btn.previousElementSibling.style.display = 'block';
-                let changeID = event.target.closest('.comment_of_user').dataset.num;
-                let time = event.target.closest('.comment_of_user').querySelector('.time').innerText;
-                console.log(time)
-                console.log(changeID)
-                let editedMessage = event.target.closest('.edit_buttons').previousElementSibling.innerText;
-                let newMess = JSON.stringify({
-                    'edited': {'message': editedMessage, 'changeID': changeID, 'time': time}
-                });
-                fetch('editMess.php', {
-                    method: 'POST',
-                    body: newMess,
-                })
-                    .then(resp => resp.json())
-                    .then(data => console.log(data))
-            })
-        })
+        exem.deleteMessage();
+        exem.editMessage();
+        exem.sendEditMessage();
     }
 </script>
 <script src="CharsCounter.js"></script>
-<script type="module" src="EditComment.js"></script>
+<script src="EditComment.js"></script>
 
     </body>
 </html>
