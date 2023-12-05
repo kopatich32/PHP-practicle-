@@ -73,3 +73,4 @@ counters.forEach(area=>{
 // $('.buy').addEventListener('click',()=>{
 //     console.log(baseValue)
 // })
+

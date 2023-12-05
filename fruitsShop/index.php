@@ -145,6 +145,6 @@ while($row = $req1->fetch_assoc()){?>
         <div class="login_title">Войти</div>
 </form>
 </div>
-<script src="scripts.js"></script>
+<script type="module" src="scripts.js"></script>
 </body>
 </html>
