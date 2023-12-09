@@ -7,8 +7,6 @@ document.addEventListener('click', function (event) {
     }
 })
 no.addEventListener('click', () => {
-    console.log('no btn')
-    // confirmWindow.classList.remove('shows');
     confirmWindow.style.display = 'none'
 })
 

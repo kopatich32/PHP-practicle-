@@ -12,7 +12,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Comment field</title>
+    <title>Комментарии</title>
     <link rel="stylesheet" href="Comment.css">
     <link rel="icon" href="upload/backgroundAbout">
 </head>
@@ -74,17 +74,16 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                     if (delBtn.contains(event.target)) {
                         currentMess = event.target.closest('.comment_of_user').dataset.num;
                         console.log(currentMess)
-
                         let thisCoords = delBtn.getBoundingClientRect();
-                        confirmWindow.style.position = 'absolute'
-                        confirmWindow.style.display = 'block'
-                        confirmWindow.style.top = thisCoords.top - confirmWindow.offsetHeight - window.pageYOffset + window.scrollY - 84 + 'px';
+                        console.log(thisCoords)
+                        confirmWindow.style.position = 'absolute';
+                        confirmWindow.style.display = 'block';
+                        confirmWindow.style.top = thisCoords.top - $('.confirm_delete_message').offsetHeight + window.pageYOffset  - 18 + 'px';
                         confirmWindow.style.left = thisCoords.left - delBtn.offsetWidth / 2 + window.pageXOffset + window.scrollX + 'px';
                         event.stopPropagation()
                     }
                 })
-
-                $('.yes').addEventListener('click', function (event) {
+                $('.yes').addEventListener('click', function () {
                     fetch('deleteMess.php', {
                         method: 'POST',
                         body: JSON.stringify({'delete': {'deleteMessage': currentMess}})
@@ -94,10 +93,10 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                 })
             })
             function deleteMessage(letter){
+                console.log(letter)
                 let targetDel = document.querySelector(`div[data-num="${letter.id}"]`);
                 targetDel.remove();
                 confirmWindow.style.display = 'none';
-
             }
         }
 
@@ -151,17 +150,6 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
     }
   let exem = new Comment();
 
-
-
-
-
-
-
-
-
-
-
-
     let $ = document.querySelector.bind(document);
     $('.send').addEventListener('click', event => {
         event.stopPropagation();
@@ -200,13 +188,11 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
                     <button class="delete">Удалить</button>
             </div>
         </div>`
-
-        $('.container').insertAdjacentHTML("beforeend", newMessage);
+        $('.comment_wrapper').insertAdjacentHTML("afterend", newMessage);
         exem.editMessage();
         exem.sendEditMessage();
         exem.deleteMessage();
     }
-
     document.addEventListener('DOMContentLoaded', ()=>{
         fetch('getExistMessage.php',{
             method: 'POST',
@@ -217,10 +203,9 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             existMess(data))
     })
 
-    function existMess(mess){
-
+    function existMess(mess) {
         console.log(mess)
-        for(let i = 0; i< mess.length; i++){
+        for (let i = 0; i < mess.length; i++) {
             let message = `
         <div class="comment_of_user" data-num="${mess[i].id}">
             <input name="val" value="${mess[i].id}" hidden>
@@ -239,6 +224,7 @@ $out = $db->query("SELECT * FROM `message` ORDER BY `id` DESC "); //ASC
             </div>
         </div>`
             $('.comment_wrapper').insertAdjacentHTML("afterend", message);
+
         }
         // delete message
         exem.deleteMessage();
