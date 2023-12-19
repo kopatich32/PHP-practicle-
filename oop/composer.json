@@ -1,0 +1,11 @@
+{
+    "name": "307k6/oop",
+    "autoload": {
+        "psr-4": {
+            "hehe\\": "src/"
+        }
+    },
+    "require": {
+        "steampixel/simple-php-router": "^0.7.1"
+    }
+}
