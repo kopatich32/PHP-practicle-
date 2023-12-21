@@ -10,8 +10,9 @@
 <body>
 <h1>SOME TEXT</h1>
 
-<input type="text" placeholder="login" id="login"><br>
-<input type="text" placeholder="password" id="pass"><br>
+<input name="login" type="text" placeholder="login" id="login"><br>
+<input name="pass" type="text" placeholder="password" id="pass"><br>
+<input name="name" type="text" placeholder="name" id="name">
 <button>registration</button>
 
 <script>
@@ -19,16 +20,21 @@
    $('button').onclick = ()=>{
        let login = $('#login').value;
        let pass = $('#pass').value;
+       let name = $('#name').value;
        let obj = JSON.stringify({
            'login': login,
            'pass': pass,
+           'name': name,
        })
-       fetch('http://oop/api/reg', {
+       fetch('http://oop/api/reg',{
            method: "POST",
            body: obj
        })
            .then(resp => resp.text())
            .then(data => console.log(data))
+$('#login').value = '';
+$('#pass').value = '';
+$('#name').value = '';
    }
 </script>
 </body>
