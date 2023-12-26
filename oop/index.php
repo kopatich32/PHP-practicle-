@@ -7,7 +7,6 @@ use Steampixel\Route;
 use hehe\controllers\UserController;
 Route::add("/laaaa", function(){
     echo 'lalalal';
-
 });
 
 Route::add('/reg', function(){
